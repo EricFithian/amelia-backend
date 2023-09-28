@@ -26,7 +26,7 @@ const User = require('./models/User')
 app.get('/', async (req, res) => {
     try {
         const allUsers = await User.find({});
-        console.log(allUsers);
+        // console.log(allUsers);
         res.json(allUsers);
     } catch(err) {
         res.status(400).json(err);
@@ -35,7 +35,8 @@ app.get('/', async (req, res) => {
 // create a test route
 app.get("/:name", async (req, res) => {
     try {
-        const username = User.findOne({username: req.params.name})
+        const username = await User.find({username: req.params.name});
+        console.log("The username is here");
         res.json(username);
     } catch(err) {
         res.status(400).json(err);
