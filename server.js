@@ -5,17 +5,19 @@ require('./config/db.connection');
 const express = require("express");
 const cors = require("cors")
 const morgan = require("morgan")
+const bodyParser = require('body-parser')
 const app = express();
 const { PORT = 4000 } = process.env;
-const User = require('./models/User')
-
 
 ///////////////////////////////
 // MIDDLEWARE
 ////////////////////////////////
+app.use(bodyParser.json())
 app.use(express.json()); // parse json bodies - this will run before our request accesses the people router
 app.use(cors()); // to prevent cors errors, open access to all origins
 app.use(morgan("dev")); // logging for development
+
+const User = require('./models/User')
 
 ///////////////////////////////
 // ROUTES
@@ -23,7 +25,8 @@ app.use(morgan("dev")); // logging for development
 
 app.get('/', async (req, res) => {
     try {
-        const allUsers = await User.find({})
+        const allUsers = await User.find({});
+        console.log(allUsers);
         res.json(allUsers);
     } catch(err) {
         res.status(400).json(err);
@@ -43,6 +46,7 @@ app.post('/', async (req, res) => {
     try {
         const newUser = await User.create(req.body);
         console.log(newUser);
+        res.redirect('/')
     } catch(err) {
         res.status(400).json(err);
     }
