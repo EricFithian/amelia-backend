@@ -12,7 +12,7 @@ const WifiSchema = new mongoose.Schema({
     type: String,
     required: [true, "Password is required"]
   },
-  vendors: {
+  vendor: {
     type: String,
     required: [true, "The vendor name is required"]
   },
