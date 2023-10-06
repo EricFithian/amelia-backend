@@ -1,5 +1,4 @@
 require("dotenv").config();
-require('./config/db.connection');
 
 // import express
 const express = require("express");
@@ -17,7 +16,7 @@ app.use(express.json()); // parse json bodies - this will run before our request
 app.use(cors()); // to prevent cors errors, open access to all origins
 app.use(morgan("dev")); // logging for development
 
-const User = require('./models/User')
+const {User, Wifi} = require('./models')
 
 ///////////////////////////////
 // ROUTES
@@ -28,6 +27,16 @@ app.get('/', async (req, res) => {
         const allUsers = await User.find({});
         // console.log(allUsers);
         res.json(allUsers);
+    } catch(err) {
+        res.status(400).json(err);
+    }
+})
+
+app.get('/wifi-access', async (req, res) => {
+    try {
+        const allWifi = await Wifi.find({});
+        // console.log(allUsers);
+        res.status(200).json(allWifi);
     } catch(err) {
         res.status(400).json(err);
     }
@@ -49,6 +58,27 @@ app.post('/', async (req, res) => {
         console.log(newUser);
         res.redirect('/')
     } catch(err) {
+        res.status(400).json(err);
+    }
+})
+
+app.post('/wifi-access', async (req, res) => {
+    try {
+        const newWifi = await Wifi.create(req.body);
+        console.log(newWifi);
+        res.status(200).json('Post was succcessful')
+    } catch(err) {
+        res.status(400).json(err);
+    }
+})
+
+app.delete('/delete', async (req, res) => {
+    try {
+        await User.deleteMany({});
+        const deleted = await User.find({});
+        console.log(deleted);
+        res.json(deleted);
+    } catch (err) {
         res.status(400).json(err);
     }
 })
