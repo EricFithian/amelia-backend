@@ -1,4 +1,4 @@
-require('./config/db.connection');
+require('../config/db.connection');
 const User = require('./User');
 const Wifi = require('./Wifi');
 
