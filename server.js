@@ -2,16 +2,16 @@ require("dotenv").config();
 
 // import express
 const express = require("express");
-const cors = require("cors")
-const morgan = require("morgan")
-const bodyParser = require('body-parser')
+const cors = require("cors");
+const morgan = require("morgan");
+const bodyParser = require('body-parser');
 const app = express();
 const { PORT = 4000 } = process.env;
 
 ///////////////////////////////
 // MIDDLEWARE
 ////////////////////////////////
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 app.use(express.json()); // parse json bodies - this will run before our request accesses the people router
 app.use(cors()); // to prevent cors errors, open access to all origins
 app.use(morgan("dev")); // logging for development
@@ -42,15 +42,15 @@ app.get('/wifi-access', async (req, res) => {
     }
 })
 // create a test route
-app.get("/:name", async (req, res) => {
-    try {
-        const username = await User.find({username: req.params.name});
-        console.log("The username is here");
-        res.json(username);
-    } catch(err) {
-        res.status(400).json(err);
-    }
-});
+// app.get("/:name", async (req, res) => {
+//     try {
+//         const username = await User.find({username: req.params.name});
+//         console.log("The username is here");
+//         res.json(username);
+//     } catch(err) {
+//         res.status(400).json(err);
+//     }
+// });
 
 app.post('/', async (req, res) => {
     try {
@@ -64,9 +64,10 @@ app.post('/', async (req, res) => {
 
 app.post('/wifi-access', async (req, res) => {
     try {
+        console.log(req.body);
         const newWifi = await Wifi.create(req.body);
         console.log(newWifi);
-        res.status(200).json('Post was succcessful')
+        res.status(200).json({result: 'The post to your database was successful'})
     } catch(err) {
         res.status(400).json(err);
     }
