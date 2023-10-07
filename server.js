@@ -7,6 +7,7 @@ const morgan = require("morgan");
 const bodyParser = require('body-parser');
 const app = express();
 const { PORT = 4000 } = process.env;
+let res, req = '';
 
 ///////////////////////////////
 // MIDDLEWARE
@@ -63,7 +64,7 @@ app.get('/wifi-access', async (req, res) => {
 //     }
 // });
 
-app.post('/', posting())
+app.post('/', posting)
 
 app.post('/wifi-access', async (req, res) => {
     try {
