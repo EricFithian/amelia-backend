@@ -55,9 +55,10 @@ app.get('/wifi-access', async (req, res) => {
 
 app.post('/', async (req, res) => {
     try {
-        console.log(req.body);
-        const newUser = await User.create(req.body);
+        newUser = req.body
         console.log(newUser);
+        const addUser = await User.create(newUser);
+        // console.log(newUser);
         res.status(200).json({result: 'The update to your database was successful'})
     } catch(err) {
         console.log(err);
@@ -69,7 +70,7 @@ app.post('/wifi-access', async (req, res) => {
     try {
         console.log(req.body);
         const newWifi = await Wifi.create(req.body);
-        console.log(newWifi);
+        // console.log(newWifi);
         res.status(200).json({result: 'The post to your database was successful'})
     } catch(err) {
         res.status(400).json(err);
@@ -80,7 +81,7 @@ app.put('/', async(req, res) => {
     try {
         updatedUser = User.find({name: req.body.name});
         console.log("Printing updated user")
-        console.log(updateUser.name);
+        console.log(updatedUser.name);
         if(updatedUser[0]) {
             updateUser = User.findByIdAndUpdate(updatedUser._id, req.body);
             console.log(updatedUser);
