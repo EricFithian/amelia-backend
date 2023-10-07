@@ -7,7 +7,6 @@ const morgan = require("morgan");
 const bodyParser = require('body-parser');
 const app = express();
 const { PORT = 4000 } = process.env;
-let res, req = '';
 
 ///////////////////////////////
 // MIDDLEWARE
@@ -19,16 +18,6 @@ app.use(morgan("dev")); // logging for development
 
 const {User, Wifi} = require('./models')
 
-const posting = async () => {
-    try {
-        console.log(req.body);
-        const newWifi = await Wifi.create(req.body);
-        console.log(newWifi);
-        res.status(200).json({result: 'The update to your database was successful'})
-    } catch(err) {
-        res.status(400).json(err);
-    }
-}
 
 ///////////////////////////////
 // ROUTES
@@ -64,7 +53,17 @@ app.get('/wifi-access', async (req, res) => {
 //     }
 // });
 
-app.post('/', posting)
+app.post('/', async (req, res) => {
+    try {
+        console.log(req.body);
+        const newUser = await User.create(req.body);
+        console.log(newUser);
+        res.status(200).json({result: 'The update to your database was successful'})
+    } catch(err) {
+        console.log(err);
+        res.json(err);
+    }
+})
 
 app.post('/wifi-access', async (req, res) => {
     try {
@@ -80,6 +79,8 @@ app.post('/wifi-access', async (req, res) => {
 app.put('/', async(req, res) => {
     try {
         updatedUser = User.findOne({name: req.body.name});
+        console.log("Printing updated user")
+        console.log(updateUser.name);
         if(updatedUser) {
             updateUser = User.findByIdAndUpdate(updatedUser._id, req.body);
             console.log(updatedUser);
@@ -87,7 +88,16 @@ app.put('/', async(req, res) => {
                 response: "The update to your database was successful"
             })
         } else {
-            posting();
+            async () => {
+                try {
+                    console.log(req.body);
+                    const newUser = await User.create(req.body);
+                    console.log(newUser);
+                    res.status(200).json({result: 'The update to your database was successful'})
+                } catch(err) {
+                    res.status(400).json(err);
+                }
+            }
         }
     } catch(err) {
         console.log(err);
