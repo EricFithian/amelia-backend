@@ -4,9 +4,8 @@ const mongoose = require("mongoose");
 // MODELS
 ////////////////////////////////
 const UserSchema = new mongoose.Schema({
-  username: {
+  name: {
     type: String,
-    unique: [true, "That username already exists"],
     required: [true, "Need a username"]
   },
   password: {

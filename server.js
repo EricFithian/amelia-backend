@@ -18,6 +18,17 @@ app.use(morgan("dev")); // logging for development
 
 const {User, Wifi} = require('./models')
 
+const posting = async () => {
+    try {
+        console.log(req.body);
+        const newWifi = await Wifi.create(req.body);
+        console.log(newWifi);
+        res.status(200).json({result: 'The update to your database was successful'})
+    } catch(err) {
+        res.status(400).json(err);
+    }
+}
+
 ///////////////////////////////
 // ROUTES
 ////////////////////////////////
@@ -52,15 +63,7 @@ app.get('/wifi-access', async (req, res) => {
 //     }
 // });
 
-app.post('/', async (req, res) => {
-    try {
-        const newUser = await User.create(req.body);
-        console.log(newUser);
-        res.redirect('/')
-    } catch(err) {
-        res.status(400).json(err);
-    }
-})
+app.post('/', posting())
 
 app.post('/wifi-access', async (req, res) => {
     try {
@@ -69,6 +72,24 @@ app.post('/wifi-access', async (req, res) => {
         console.log(newWifi);
         res.status(200).json({result: 'The post to your database was successful'})
     } catch(err) {
+        res.status(400).json(err);
+    }
+})
+
+app.put('/', async(req, res) => {
+    try {
+        updatedUser = User.findOne({name: req.body.name});
+        if(updatedUser) {
+            updateUser = User.findByIdAndUpdate(updatedUser._id, req.body);
+            console.log(updatedUser);
+            res.status(200).json({
+                response: "The update to your database was successful"
+            })
+        } else {
+            posting();
+        }
+    } catch(err) {
+        console.log(err);
         res.status(400).json(err);
     }
 })
