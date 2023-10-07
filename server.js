@@ -78,10 +78,10 @@ app.post('/wifi-access', async (req, res) => {
 
 app.put('/', async(req, res) => {
     try {
-        updatedUser = User.findOne({name: req.body.name});
+        updatedUser = User.find({name: req.body.name});
         console.log("Printing updated user")
         console.log(updateUser.name);
-        if(updatedUser) {
+        if(updatedUser[0]) {
             updateUser = User.findByIdAndUpdate(updatedUser._id, req.body);
             console.log(updatedUser);
             res.status(200).json({
