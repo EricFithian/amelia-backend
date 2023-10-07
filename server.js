@@ -81,7 +81,7 @@ app.put('/', async(req, res) => {
     try {
         updatedUser = User.find({name: req.body.name});
         console.log("Printing updated user")
-        console.log(updatedUser.name);
+        console.log(updatedUser);
         if(updatedUser[0]) {
             updateUser = User.findByIdAndUpdate(updatedUser._id, req.body);
             console.log(updatedUser);
