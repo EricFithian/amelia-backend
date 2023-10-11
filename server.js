@@ -62,7 +62,7 @@ app.post('/', async (req, res) => {
         res.status(200).json({result: 'The update to your database was successful'})
     } catch(err) {
         console.log(err);
-        res.json(err);
+        res.status(403).json({result: err});
     }
 })
 
