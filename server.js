@@ -73,7 +73,7 @@ app.post('/wifi-access', async (req, res) => {
         console.log(newWifi);
         res.status(200).json({result: 'The post to your database was successful'})
     } catch(err) {
-        res.status(400).json(err);
+        res.status(400).json({result: err});
     }
 })
 
