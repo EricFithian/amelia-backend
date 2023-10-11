@@ -58,7 +58,7 @@ app.post('/', async (req, res) => {
         newUser = req.body
         console.log(newUser);
         const addUser = await User.create(newUser);
-        // console.log(newUser);
+        console.log(newUser);
         res.status(200).json({result: 'The update to your database was successful'})
     } catch(err) {
         console.log(err);
