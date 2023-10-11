@@ -58,7 +58,7 @@ app.post('/', async (req, res) => {
         newUser = req.body
         console.log(newUser);
         const addUser = await User.create(newUser);
-        console.log(newUser);
+        console.log(addUser);
         res.status(200).json({result: 'The update to your database was successful'})
     } catch(err) {
         console.log(err);
@@ -70,7 +70,7 @@ app.post('/wifi-access', async (req, res) => {
     try {
         console.log(req.body);
         const newWifi = await Wifi.create(req.body);
-        // console.log(newWifi);
+        console.log(newWifi);
         res.status(200).json({result: 'The post to your database was successful'})
     } catch(err) {
         res.status(400).json(err);
