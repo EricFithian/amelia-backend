@@ -89,30 +89,14 @@ app.get('/cleanup', async(req, res) => {
 
 app.put('/', async(req, res) => {
     try {
-        updatedUser = await User.find({name: req.body.name});
-        console.log("Printing updated user")
-        console.log(updatedUser);
-        if(updatedUser[0]) {
-            updateUser = await User.findByIdAndUpdate(updatedUser._id, req.body);
-            console.log(updatedUser);
-            res.status(200).json({
-                response: "The update to your database was successful"
-            })
-        } else {
-            async () => {
-                try {
-                    console.log(req.body);
-                    const newUser = await User.create(req.body);
-                    console.log(newUser);
-                    res.status(200).json({result: 'The update to your database was successful'})
-                } catch(err) {
-                    res.status(400).json(err);
-                }
-            }
-        }
+        toBeUpdated = await User.find({email: req.body.email});
+        console.log(toBeUpdated);
+        toBeUpdated.password = req.body.password;
+        updatedUser = await User.findByIdAndUpdate(toBeUpdated._id, toBeUpdated);
+        res.send(200).json({result: "Update successful"});
     } catch(err) {
         console.log(err);
-        res.status(400).json(err);
+        res.status(400).json({result: err});
     }
 })
 
