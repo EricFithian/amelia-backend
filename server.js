@@ -89,14 +89,17 @@ app.get('/cleanup', async(req, res) => {
 
 app.put('/', async(req, res) => {
     try {
-        toBeUpdated = await User.find({email: req.body.email});
-        console.log(toBeUpdated);
+        console.log("This was hit");
+        console.log(req.body);
+        toBeUpdated = await User.findOne({email: req.body.email});
         toBeUpdated.password = req.body.password;
+        console.log(toBeUpdated);
         updatedUser = await User.findByIdAndUpdate(toBeUpdated._id, toBeUpdated);
-        res.send(200).json({result: "Update successful"});
+        console.log(updatedUser);
+        res.status(200).json({result: "Update successful"});
     } catch(err) {
         console.log(err);
-        res.status(400).json({result: err});
+        res.status(403).json({result: req.body});
     }
 })
 
