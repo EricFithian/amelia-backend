@@ -14,6 +14,9 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: [true, "Email is required"],
     unique: [true, "Must be a unique email address"]
+  }, type: {
+    type: String,
+    default: "Member"
   }
 },{timestamps: true});
 
