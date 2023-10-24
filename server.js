@@ -37,7 +37,7 @@ app.get('/:email', async (req, res) => {
     try {
         const currentUser = await User.findOne({email: req.params.email});
         console.log(currentUser);
-        res.json(currentUser);
+        currentUser ? res.json(currentUser) : res.json({})
     } catch(err) {
         res.status(400).json(err);
     }
