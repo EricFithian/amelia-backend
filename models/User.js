@@ -14,7 +14,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: [true, "Email is required"],
     unique: [true, "Must be a unique email address"]
-  }, type: {
+  }, role: {
     type: String,
     default: "Member"
   }
