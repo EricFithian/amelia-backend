@@ -33,21 +33,21 @@ app.get('/', async (req, res) => {
     }
 })
 
-app.get('/:email', async (req, res) => {
-    try {
-        const currentUser = await User.findOne({email: req.params.email});
-        console.log(currentUser);
-        currentUser ? res.json(currentUser) : res.json({role: null})
-    } catch(err) {
-        res.status(400).json(err);
-    }
-})
-
 app.get('/wifi-access', async (req, res) => {
     try {
         const allWifi = await Wifi.find({});
         // console.log(allUsers);
         res.status(200).json(allWifi);
+    } catch(err) {
+        res.status(400).json(err);
+    }
+})
+
+app.get('/:email', async (req, res) => {
+    try {
+        const currentUser = await User.findOne({email: req.params.email});
+        console.log(currentUser);
+        currentUser ? res.json(currentUser) : res.json({role: null})
     } catch(err) {
         res.status(400).json(err);
     }
