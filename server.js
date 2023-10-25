@@ -43,15 +43,6 @@ app.get('/wifi-access', async (req, res) => {
     }
 })
 
-app.get('/:email', async (req, res) => {
-    try {
-        const currentUser = await User.findOne({email: req.params.email});
-        console.log(currentUser);
-        currentUser ? res.json(currentUser) : res.json({role: null})
-    } catch(err) {
-        res.status(400).json(err);
-    }
-})
 // create a test route
 // app.get("/:name", async (req, res) => {
 //     try {
@@ -94,6 +85,16 @@ app.get('/cleanup', async(req, res) => {
         res.redirect('/');
     } catch(err) {
         res.status(403).json({result: err})
+    }
+})
+
+app.get('/:email', async (req, res) => {
+    try {
+        const currentUser = await User.findOne({email: req.params.email});
+        console.log(currentUser);
+        currentUser ? res.json(currentUser) : res.json({role: null})
+    } catch(err) {
+        res.status(400).json(err);
     }
 })
 
