@@ -110,7 +110,8 @@ app.put('/', async(req, res) => {
         res.status(200).json({result: "Update successful"});
     } catch(err) {
         console.log(err);
-        res.status(403).json({result: req.body});
+
+        res.status(403).json({result: res.redirect(`/${req.body.email}`)});
     }
 })
 
