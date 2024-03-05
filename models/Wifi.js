@@ -5,28 +5,22 @@ const mongoose = require("mongoose");
 ////////////////////////////////
 const WifiSchema = new mongoose.Schema({
   number: {
-    type: String,
-    required: [true, "Need a username"]
+    type: String
   },
   password: {
-    type: String,
-    required: [true, "Password is required"]
+    type: String
   },
   vendor: {
-    type: String,
-    required: [true, "The vendor name is required"]
+    type: String
   },
   startDate: {
-    type: String,
-    required: [true, "The start date is required"]
+    type: String
   },
   endDate: {
-    type: String,
-    required: [true, "The end date is required"]
+    type: String
   },
   duration: {
-    type: Number,
-    required: [true, "The duration is required"]
+    type: Number
   },
 },{timestamps: true});
 
