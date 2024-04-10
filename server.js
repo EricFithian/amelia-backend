@@ -43,6 +43,14 @@ app.get('/wifi-access', async (req, res) => {
     }
 })
 
+app.get('/frontend', async (req, res) => {
+    try {
+        // console.log(allUsers);
+        res.render();
+    } catch(err) {
+        res.status(400).json(err);
+    }
+})
 // create a test route
 // app.get("/:name", async (req, res) => {
 //     try {
@@ -78,15 +86,15 @@ app.post('/wifi-access', async (req, res) => {
     }
 })
 
-app.get('/cleanup', async(req, res) => {
-    try {
-        await User.deleteMany({});
-        await Wifi.deleteMany({});
-        res.redirect('/');
-    } catch(err) {
-        res.status(403).json({result: err})
-    }
-})
+// app.get('/cleanup', async(req, res) => {
+//     try {
+//         await User.deleteMany({});
+//         await Wifi.deleteMany({});
+//         res.redirect('/');
+//     } catch(err) {
+//         res.status(403).json({result: err})
+//     }
+// })
 
 app.get('/:email', async (req, res) => {
     try {
@@ -107,7 +115,7 @@ app.put('/', async(req, res) => {
         console.log(toBeUpdated);
         updatedUser = await User.findByIdAndUpdate(toBeUpdated._id, toBeUpdated);
         console.log(updatedUser);
-        res.status(200).json({result: "Update successful"});
+        res.redirect(`/${req.body.email}`);
     } catch(err) {
         console.log(err);
 
@@ -115,16 +123,16 @@ app.put('/', async(req, res) => {
     }
 })
 
-app.delete('/delete', async (req, res) => {
-    try {
-        await User.deleteMany({});
-        const deleted = await User.find({});
-        console.log(deleted);
-        res.json(deleted);
-    } catch (err) {
-        res.status(400).json(err);
-    }
-})
+// app.delete('/delete', async (req, res) => {
+//     try {
+//         await User.deleteMany({});
+//         const deleted = await User.find({});
+//         console.log(deleted);
+//         res.json(deleted);
+//     } catch (err) {
+//         res.status(400).json(err);
+//     }
+// })
 
 ///////////////////////////////
 // LISTENER
