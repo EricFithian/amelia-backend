@@ -115,7 +115,7 @@ app.put('/', async(req, res) => {
         console.log(toBeUpdated);
         updatedUser = await User.findByIdAndUpdate(toBeUpdated._id, toBeUpdated);
         console.log(updatedUser);
-        res.redirect(`/${req.body.email}`);
+        res.status(200).json({result: `Updated the password for ${req.body.email}`});
     } catch(err) {
         console.log(err);
 
