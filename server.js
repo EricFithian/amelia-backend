@@ -86,15 +86,15 @@ app.post('/wifi-access', async (req, res) => {
     }
 })
 
-// app.get('/cleanup', async(req, res) => {
-//     try {
-//         await User.deleteMany({});
-//         await Wifi.deleteMany({});
-//         res.redirect('/');
-//     } catch(err) {
-//         res.status(403).json({result: err})
-//     }
-// })
+app.get('/cleanup', async(req, res) => {
+    try {
+        await User.deleteMany({});
+        await Wifi.deleteMany({});
+        res.redirect('/');
+    } catch(err) {
+        res.status(403).json({result: err})
+    }
+})
 
 app.get('/:email', async (req, res) => {
     try {
