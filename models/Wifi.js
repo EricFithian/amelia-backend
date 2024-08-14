@@ -20,7 +20,7 @@ const WifiSchema = new mongoose.Schema({
     type: String
   },
   duration: {
-    type: Number
+    type: String
   },
 },{timestamps: true});
 
