@@ -17,6 +17,9 @@ const UserSchema = new mongoose.Schema({
   }, role: {
     type: String,
     default: "Member"
+  }, phoneNumber: {
+    type: String,
+    default: "123-867-5309"
   }
 },{timestamps: true});
 

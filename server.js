@@ -1,4 +1,5 @@
 require("dotenv").config();
+const moment = require('moment');
 
 // import express
 const express = require("express");
@@ -6,7 +7,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 const bodyParser = require('body-parser');
 const app = express();
-const { PORT = 4000 } = process.env;
+const { PORT = 4321 } = process.env;
 
 ///////////////////////////////
 // MIDDLEWARE
@@ -15,6 +16,9 @@ app.use(bodyParser.json());
 app.use(express.json()); // parse json bodies - this will run before our request accesses the people router
 app.use(cors()); // to prevent cors errors, open access to all origins
 app.use(morgan("dev")); // logging for development
+app.set('view engine', 'ejs');
+app.use(express.static('public'));
+
 
 const {User, Wifi} = require('./models')
 
@@ -45,8 +49,8 @@ app.get('/wifi-access', async (req, res) => {
 
 app.get('/frontend', async (req, res) => {
     try {
-        // console.log(allUsers);
-        res.render();
+        const wifis = await Wifi.find({});
+        res.render('frontend', {wifis, moment});
     } catch(err) {
         res.status(400).json(err);
     }

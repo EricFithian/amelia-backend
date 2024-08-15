@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.png">
+    <link rel="stylesheet" href="/css/frontend.css">
+</head>
+<body>
+    <% wifis.forEach(function(wifi) { %>
+        <div class="card">
+            <img class="img" src="<%= wifi.image %>" alt="Avatar" style="max-height: 20%;">
+            <div class="details">
+                <h4><b>Vendor: <%= wifi.vendor %></b></h4><hr>
+                <p>Start date: <%= moment(wifi.startDate).format('LL') %></p>
+                <p>End date: <%= moment(wifi.endDate).format('LL') %></p>
+                <p>Number of guests: <%= wifi.number %></p>
+                <p>Duration: <%= wifi.duration %></p>
+                <p>Password: <%= wifi.password %></p>
+            </div>
+            <hr>
+        </div>
+    <% }) %>
+</body>
+</html>

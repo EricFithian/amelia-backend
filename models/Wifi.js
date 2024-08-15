@@ -21,7 +21,10 @@ const WifiSchema = new mongoose.Schema({
   },
   duration: {
     type: String
-  },
+  }, image: {
+    type: String,
+    default: "https://cdn.vectorstock.com/i/500p/65/30/default-image-icon-missing-picture-page-vector-40546530.jpg"
+  }
 },{timestamps: true});
 
 const Wifi = mongoose.model("Wifi", WifiSchema);
