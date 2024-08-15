@@ -12,7 +12,9 @@ const { PORT = 4321 } = process.env;
 ///////////////////////////////
 // MIDDLEWARE
 ////////////////////////////////
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb', extended: true}));
+app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
+app.use(bodyParser.text({ limit: '200mb' }));
 app.use(express.json()); // parse json bodies - this will run before our request accesses the people router
 app.use(cors()); // to prevent cors errors, open access to all origins
 app.use(morgan("dev")); // logging for development
@@ -40,7 +42,8 @@ app.get('/', async (req, res) => {
 app.get('/wifi-access', async (req, res) => {
     try {
         const allWifi = await Wifi.find({});
-        // console.log(allUsers);
+        console.log(req.params)
+        console.log(req.params.count);
         res.status(200).json(allWifi);
     } catch(err) {
         res.status(400).json(err);

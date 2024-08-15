@@ -23,7 +23,10 @@ const WifiSchema = new mongoose.Schema({
     type: String
   }, image: {
     type: String,
-    default: "https://cdn.vectorstock.com/i/500p/65/30/default-image-icon-missing-picture-page-vector-40546530.jpg"
+    default: "iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=="
+  }, imageType: {
+    type: String,
+    default: "image/png"
   }
 },{timestamps: true});
 
