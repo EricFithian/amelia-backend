@@ -3,24 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Users</title>
+    <title>Guest Wifi Entries</title>
     <link rel="icon" type="image/x-icon" href="/images/favicon.png">
     <link rel="stylesheet" href="/css/frontend.css">
 </head>
 <body>
-    <% wifis.forEach(function(wifi) { %>
-        <div class="card">
-            <img src="data:<%= wifi.imageType %>;base64, <%= wifi.image %>" alt="<%= wifi.vendor %>'s image" />        
-            <div class="details">
-                <h4><b>Vendor: <%= wifi.vendor %></b></h4><hr>
-                <p>Start date: <%= moment(wifi.startDate).format('LL') %></p>
-                <p>End date: <%= moment(wifi.endDate).format('LL') %></p>
-                <p>Number of guests: <%= wifi.number %></p>
-                <p>Duration: <%= wifi.duration %></p>
-                <p>Password: <%= wifi.password %></p>
+    <section>
+        <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="card">
+                    <% for(let i = 0; i < wifis.length; i++) { %>
+                        <div class="cover item-a">
+                                <img class="pic" src="data:<%= wifis[i].imageType %>;base64, <%= wifis[i].image %>" alt="<%= wifis[i].vendor %>'s image" />        
+                                <h4><b>Vendor: <%= wifis[i].vendor %></b></h4>
+                            <div class="card-back">
+                                <p>Start date: <%= moment(wifis[i].startDate).format('LL') %></p>
+                                <p>End date: <%= moment(wifis[i].endDate).format('LL') %></p>
+                                <p>Number of guests: <%= wifis[i].number %></p>
+                                <p>Duration: <%= wifis[i].duration %></p>
+                                <p>Password: <%= wifis[i].password %></p>
+                            </div>
+                        </div>
+                    <% } %>
+                </div>
             </div>
-            <hr>
         </div>
-    <% }) %>
+    </section>
 </body>
 </html>
