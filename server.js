@@ -125,7 +125,8 @@ app.get('/:email', async (req, res) => {
     try {
         const currentUser = await User.findOne({email: req.params.email});
         console.log(currentUser);
-        currentUser ? res.json(currentUser) : res.json({role: null})
+        currentUser ? res.json(currentUser) : currentUser = await User.findOne({name: req.params.name})
+        currentUser ? res.json(currentUser) : res.json(null)
     } catch(err) {
         res.status(400).json(err);
     }
