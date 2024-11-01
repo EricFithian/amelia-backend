@@ -93,15 +93,15 @@ app.post('/wifi-access', async (req, res) => {
     }
 })
 
-// app.get('/cleanup', async(req, res) => {
-//     try {
-//         await User.deleteMany({});
-//         await Wifi.deleteMany({});
-//         res.redirect('/');
-//     } catch(err) {
-//         res.status(403).json({result: err})
-//     }
-// })
+app.get('/reset', async(req, res) => {
+    try {
+        await User.deleteMany({});
+        await Wifi.deleteMany({});
+        res.redirect('/');
+    } catch(err) {
+        res.status(403).json({result: err})
+    }
+})
 
 app.get('/clean-wifi', async(req, res) => {
     try {
@@ -112,14 +112,14 @@ app.get('/clean-wifi', async(req, res) => {
     }
 })
 
-// app.get('/clean-users', async(req, res) => {
-//     try {
-//         await User.deleteMany({});
-//         res.redirect('/');
-//     } catch(err) {
-//         res.status(403).json({result: err})
-//     }
-// })
+app.get('/clean-users', async(req, res) => {
+    try {
+        await User.deleteMany({});
+        res.redirect('/');
+    } catch(err) {
+        res.status(403).json({result: err})
+    }
+})
 
 app.get('/:email', async (req, res) => {
     try {
