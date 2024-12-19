@@ -121,7 +121,7 @@ app.get('/clean-users', async(req, res) => {
     }
 })
 
-app.get('/appointment', async(req, res) => {
+app.post('/appointment', async(req, res) => {
     try {
         const appointment = await Appointment.create(req.body);
         console.log(appointment)
