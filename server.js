@@ -22,7 +22,7 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
 
-const {User, Wifi} = require('./models')
+const {User, Wifi, Appointment} = require('./models')
 
 
 ///////////////////////////////
@@ -116,6 +116,16 @@ app.get('/clean-users', async(req, res) => {
     try {
         await User.deleteMany({});
         res.redirect('/');
+    } catch(err) {
+        res.status(403).json({result: err})
+    }
+})
+
+app.get('/appointment', async(req, res) => {
+    try {
+        const appointment = await Appointment.create(req.body);
+        console.log(appointment)
+        res.status(201).json({'status': `I have created a new appointment for ${req.body.patientName}`})
     } catch(err) {
         res.status(403).json({result: err})
     }
