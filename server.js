@@ -170,6 +170,15 @@ app.post('/appointments', async(req, res) => {
     }
 })
 
+app.post('/seed_appointments', async(req, res) => {
+    try {
+        const appointments = await Appointment.create(optum);
+        res.status(201).redirect('./appointments')
+    } catch(err) {
+        res.status(403).json({result: err})
+    }
+})
+
 app.put('/appointments/:text', async(req, res) => {
     try {
         toBeUpdated = await Appointment.findOne({reason: [{text: req.params.text}]});
