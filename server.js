@@ -132,7 +132,7 @@ app.get('/clean-users', async(req, res) => {
 
 app.get('/appointments', async(req, res) => {
     try {
-        const appointment = await Appointment.find({});
+        const appointment = await Appointment.find([]);
         console.log(appointment)
         res.status(201).json(appointment)
     } catch(err) {
