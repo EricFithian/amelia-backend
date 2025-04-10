@@ -134,17 +134,27 @@ app.get('/appointments', async(req, res) => {
     try {
         const appointment = await Appointment.find({});
         console.log(appointment)
-        res.status(201).json({'status': `I have created a new appointment for ${req.body.patientName}`})
+        res.status(201).json(appointment)
     } catch(err) {
         res.status(403).json({result: err})
     }
 })
 
-app.get('/appointments/:name', async(req, res) => {
+app.get('/appointments/user/:name', async(req, res) => {
     try {
         const appointments = await Appointment.find({participant: [{ actor: {display: req.params.name}}]});
         console.log(appointments)
         res.status(201).json(appointments)
+    } catch(err) {
+        res.status(403).json({result: err})
+    }
+})
+
+app.get('/appointments/:reason', async(req, res) => {
+    try {
+        const appointment = await Appointment.findOne({reason: [{ text:req.params.reason}]});
+        console.log(appointment)
+        res.status(201).json(appointment)
     } catch(err) {
         res.status(403).json({result: err})
     }
@@ -159,6 +169,19 @@ app.post('/appointments', async(req, res) => {
         res.status(403).json({result: err})
     }
 })
+
+app.put('/appointments/:text', async(req, res) => {
+    try {
+        toBeUpdated = await Appointment.findOne({reason: [{text: req.params.text}]});
+        update = req.body
+        updatedUser = await Appointment.findByIdAndUpdate(toBeUpdated._id, update);
+        res.status(200).json({result: `Updated the appointment`});
+    } catch(err) {
+        console.log(err);
+        res.status(403).json({result: res.redirect(`/${req.body.email}`)});
+    }
+})
+
 
 app.get('/:email', async (req, res) => {
     try {
