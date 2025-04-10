@@ -3,24 +3,24 @@ const mongoose = require("mongoose");
 ///////////////////////////////
 // MODELS
 ////////////////////////////////
-const identifierSchema = new mongoose.Schema({
+let identifierSchema = new mongoose.Schema({
   system: {type: String, default: "urn:oid:1.2.840.114350.1.13.861.1.7.3.698084.8"},
   value: {type: String, default: "10001659236"}
 })
 
-const serviceCodingSchema = new mongoose.Schema({
+let serviceCodingSchema = new mongoose.Schema({
   system: {type: String, default: "http://open.epic.com/FHIR/StructureDefinition/appointment-service-category"},
   code: {type: String, default: "appointment"},
   display: {type: String, default: "Appointment"}
 })
 
-const serviceTypeCodingSchema = new mongoose.Schema({
+let serviceTypeCodingSchema = new mongoose.Schema({
     system: {type: String, default: "urn:oid:1.2.840.114350.1.13.861.1.7.2.808267"},
     code: {type: String, default: "579"},
     display: {type: String, default: "ABF Office Visit"}
 })
 
-const appointmentTypeCodingSchema = new mongoose.Schema(
+let appointmentTypeCodingSchema = new mongoose.Schema(
   {
     system: {type: String, default: "http://hl7.org/fhir/v3/ActCode"},
     code: {type: String, default: "AMB"},
@@ -28,14 +28,7 @@ const appointmentTypeCodingSchema = new mongoose.Schema(
   }
 )
 
-const appointmentTypeReasonSchema = new mongoose.Schema(
-  {
-    coding: [appointmentTypeReasonCodingSchema],
-    text: {type: String, default: "Abnormal head movements"}
-  }
-)
-
-const appointmentTypeReasonCodingSchema = new mongoose.Schema(
+let appointmentTypeReasonCodingSchema = new mongoose.Schema(
   {
     system: {type: String, default: "http://snomed.info/sct"},
     code: {type: String, default: "271799000"},
@@ -43,7 +36,14 @@ const appointmentTypeReasonCodingSchema = new mongoose.Schema(
   }
 )
 
-const participantSchema = new mongoose.Schema(
+let appointmentTypeReasonSchema = new mongoose.Schema(
+  {
+    coding: [appointmentTypeReasonCodingSchema],
+    text: {type: String, default: "Abnormal head movements"}
+  }
+)
+
+let participantSchema = new mongoose.Schema(
   {
     actor: {
       reference: {type: String, default: "https://hostname/instance/api/FHIR/STU3/Patient/eFs2zvgmbGfgWFfHliSRYZA3"},
@@ -65,7 +65,7 @@ const participantSchema = new mongoose.Schema(
   }, 
 )
 
-const AppointmentsSchema = new mongoose.Schema({
+let AppointmentsSchema = new mongoose.Schema({
   resourceType: {
     type: String,
     default: "Appointment"
