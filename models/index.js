@@ -1,10 +1,10 @@
 require('../config/db.connection');
 const User = require('./User');
 const Wifi = require('./Wifi');
-const Appointment = require('./Appointments')
+const Appointments = require('./Appointments')
 
 module.exports = {
     User,
     Wifi,
-    Appointment
+    Appointments
 }

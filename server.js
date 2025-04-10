@@ -170,12 +170,14 @@ app.post('/appointments', async(req, res) => {
     }
 })
 
-app.post('/seed_appointments', async(req, res) => {
+app.get('/seed_appointments', async(req, res) => {
     try {
+        log.info(optum)
         const appointments = await Appointment.create(optum);
+        log.info(appointments)
         res.status(201).redirect('./appointments')
     } catch(err) {
-        res.status(403).json({result: err})
+        res.status(403).json(err)
     }
 })
 

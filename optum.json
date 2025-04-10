@@ -54,7 +54,6 @@
         "start": "2021-08-22T13:15:00Z",
         "end": "2021-08-22T13:30:00Z",
         "minutesDuration": 15,
-        "created": "2021-08-20",
         "comment": "Patient instructions are spiffy!\n\nThis will get you to google!\n",
         "participant": [
             {

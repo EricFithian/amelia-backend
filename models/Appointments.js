@@ -6,10 +6,10 @@ const mongoose = require("mongoose");
 const AppointmentsSchema = new mongoose.Schema({
   resourceType: {
     type: String,
-    required: [true, "Resource is required"],
+    default: "Appointment"
   }, id: {
     type: String,
-    required: [true, "Patient id is required"]
+    default: "ePjxkyjA8gju08Vwqc.iiAFHBGCmkucuk3O15LOr0KFg3"
   }, identifier: [
     {
       system: {type: String, default: "urn:oid:1.2.840.114350.1.13.861.1.7.3.698084.8"},
@@ -58,8 +58,8 @@ const AppointmentsSchema = new mongoose.Schema({
       text: {type: String, default: "Abnormal head movements"}
     }
   ],
-  start: {type: Date, default: "2021-08-22T13:15:00Z"},
-  end: {type: Date, default: "2021-08-22T13:30:00Z"},
+  start: {type: String, default: "2021-08-22T13:15:00Z"},
+  end: {type: String, default: "2021-08-22T13:30:00Z"},
   minutesDuration: {type: Number, default: 15},
   comment: {type: String, default: "Patient instructions are spiffy!\n\nThis will get you to google!\n"},
   participant: [
