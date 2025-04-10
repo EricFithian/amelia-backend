@@ -23,6 +23,7 @@ app.use(express.static('public'));
 
 
 const {User, Wifi, Appointment} = require('./models')
+const optum = require('./optum.json')
 
 
 ///////////////////////////////
@@ -105,87 +106,7 @@ app.get('/reset', async(req, res) => {
 
 app.get('/optum/instance/api/FHIR/STU3/Appointment/patient', async(req, res) => {
     try {
-        res.send({
-            "resourceType": "Appointment",
-            "id": "ePjxkyjA8gju08Vwqc.iiAFHBGCmkucuk3O15LOr0KFg3",
-            "identifier": [
-                {
-                    "system": "urn:oid:1.2.840.114350.1.13.861.1.7.3.698084.8",
-                    "value": "10001659236"
-                }
-            ],
-            "status": "proposed",
-            "serviceCategory": {
-                "coding": [
-                    {
-                        "system": "http://open.epic.com/FHIR/StructureDefinition/appointment-service-category",
-                        "code": "appointment",
-                        "display": "Appointment"
-                    }
-                ],
-                "text": "appointment"
-            },
-            "serviceType": [
-                {
-                    "coding": [
-                        {
-                            "system": "urn:oid:1.2.840.114350.1.13.861.1.7.2.808267",
-                            "code": "579",
-                            "display": "ABF Office Visit"
-                        }
-                    ]
-                }
-            ],
-            "appointmentType": {
-                "coding": [
-                    {
-                        "system": "http://hl7.org/fhir/v3/ActCode",
-                        "code": "AMB",
-                        "display": "Ambulatory"
-                    }
-                ]
-            },
-            "reason": [
-                {
-                    "coding": [
-                        {
-                            "system": "http://snomed.info/sct",
-                            "code": "271799000",
-                            "display": "Head movements abnormal (finding)"
-                        }
-                    ],
-                    "text": "Abnormal head movements"
-                }
-            ],
-            "start": "2021-08-22T13:15:00Z",
-            "end": "2021-08-22T13:30:00Z",
-            "minutesDuration": 15,
-            "created": "2021-08-20",
-            "comment": "Patient instructions are spiffy!\n\nThis will get you to google!\n",
-            "participant": [
-                {
-                    "actor": {
-                        "reference": "https://hostname/instance/api/FHIR/STU3/Patient/eFs2zvgmbGfgWFfHliSRYZA3",
-                        "display": "Gibson,Ken"
-                    },
-                    "status": "tentative"
-                },
-                {
-                    "actor": {
-                        "reference": "https://hostname/instance/api/FHIR/STU3/Practitioner/euc69RmkeUC5UjZOIGu0FiA3",
-                        "display": "Amanda Fahr"
-                    },
-                    "status": "tentative"
-                },
-                {
-                    "actor": {
-                        "reference": "https://hostname/instance/api/FHIR/STU3/Location/e6gRswU5WJtj7msgU7NZiYw3",
-                        "display": "ABF Family Practice"
-                    },
-                    "status": "tentative"
-                }
-            ]
-        })
+        res.send(optum)
     } catch(err) {
         res.status(403).json({result: err})
     }
@@ -209,7 +130,27 @@ app.get('/clean-users', async(req, res) => {
     }
 })
 
-app.post('/appointment', async(req, res) => {
+app.get('/appointments', async(req, res) => {
+    try {
+        const appointment = await Appointment.find({});
+        console.log(appointment)
+        res.status(201).json({'status': `I have created a new appointment for ${req.body.patientName}`})
+    } catch(err) {
+        res.status(403).json({result: err})
+    }
+})
+
+app.get('/appointments/:name', async(req, res) => {
+    try {
+        const appointments = await Appointment.find({participant: [{ actor: {display: req.params.name}}]});
+        console.log(appointments)
+        res.status(201).json(appointments)
+    } catch(err) {
+        res.status(403).json({result: err})
+    }
+})
+
+app.post('/appointments', async(req, res) => {
     try {
         const appointment = await Appointment.create(req.body);
         console.log(appointment)

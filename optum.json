@@ -1,0 +1,642 @@
+[
+    {
+        "resourceType": "Appointment",
+        "id": "ePjxkyjA8gju08Vwqc.iiAFHBGCmkucuk3O15LOr0KFg3",
+        "identifier": [
+            {
+                "system": "urn:oid:1.2.840.114350.1.13.861.1.7.3.698084.8",
+                "value": "10001659236"
+            }
+        ],
+        "status": "proposed",
+        "serviceCategory": {
+            "coding": [
+                {
+                    "system": "http://open.epic.com/FHIR/StructureDefinition/appointment-service-category",
+                    "code": "appointment",
+                    "display": "Appointment"
+                }
+            ],
+            "text": "appointment"
+        },
+        "serviceType": [
+            {
+                "coding": [
+                    {
+                        "system": "urn:oid:1.2.840.114350.1.13.861.1.7.2.808267",
+                        "code": "579",
+                        "display": "ABF Office Visit"
+                    }
+                ]
+            }
+        ],
+        "appointmentType": {
+            "coding": [
+                {
+                    "system": "http://hl7.org/fhir/v3/ActCode",
+                    "code": "AMB",
+                    "display": "Ambulatory"
+                }
+            ]
+        },
+        "reason": [
+            {
+                "coding": [
+                    {
+                        "system": "http://snomed.info/sct",
+                        "code": "271799000",
+                        "display": "I have a headache"
+                    }
+                ],
+                "text": "Headache"
+            }
+        ],
+        "start": "2021-08-22T13:15:00Z",
+        "end": "2021-08-22T13:30:00Z",
+        "minutesDuration": 15,
+        "created": "2021-08-20",
+        "comment": "Patient instructions are spiffy!\n\nThis will get you to google!\n",
+        "participant": [
+            {
+                "actor": {
+                    "reference": "https://hostname/instance/api/FHIR/STU3/Patient/eFs2zvgmbGfgWFfHliSRYZA3",
+                    "display": "Eric Fithian"
+                },
+                "status": "tentative"
+            },
+            {
+                "actor": {
+                    "reference": "https://hostname/instance/api/FHIR/STU3/Practitioner/euc69RmkeUC5UjZOIGu0FiA3",
+                    "display": "Amanda Fahr"
+                },
+                "status": "tentative"
+            },
+            {
+                "actor": {
+                    "reference": "https://hostname/instance/api/FHIR/STU3/Location/e6gRswU5WJtj7msgU7NZiYw3",
+                    "display": "ABF Family Practice"
+                },
+                "status": "tentative"
+            }
+        ]
+    }, {
+        "resourceType": "Appointment",
+        "id": "ePjxkyjA8gju08Vwqc.iiAFHBGCmkucuk3O15LOr0KFg3",
+        "identifier": [
+            {
+                "system": "urn:oid:1.2.840.114350.1.13.861.1.7.3.698084.8",
+                "value": "10001659236"
+            }
+        ],
+        "status": "proposed",
+        "serviceCategory": {
+            "coding": [
+                {
+                    "system": "http://open.epic.com/FHIR/StructureDefinition/appointment-service-category",
+                    "code": "appointment",
+                    "display": "Appointment"
+                }
+            ],
+            "text": "appointment"
+        },
+        "serviceType": [
+            {
+                "coding": [
+                    {
+                        "system": "urn:oid:1.2.840.114350.1.13.861.1.7.2.808267",
+                        "code": "579",
+                        "display": "ABF Office Visit"
+                    }
+                ]
+            }
+        ],
+        "appointmentType": {
+            "coding": [
+                {
+                    "system": "http://hl7.org/fhir/v3/ActCode",
+                    "code": "AMB",
+                    "display": "Ambulatory"
+                }
+            ]
+        },
+        "reason": [
+            {
+                "coding": [
+                    {
+                        "system": "http://snomed.info/sct",
+                        "code": "271799000",
+                        "display": "Injury"
+                    }
+                ],
+                "text": "I broke my leg"
+            }
+        ],
+        "start": "2021-08-22T13:15:00Z",
+        "end": "2021-08-22T13:30:00Z",
+        "minutesDuration": 15,
+        "created": "2021-08-20",
+        "comment": "Patient instructions are spiffy!\n\nThis will get you to google!\n",
+        "participant": [
+            {
+                "actor": {
+                    "reference": "https://hostname/instance/api/FHIR/STU3/Patient/eFs2zvgmbGfgWFfHliSRYZA3",
+                    "display": "Eric Fithian"
+                },
+                "status": "tentative"
+            },
+            {
+                "actor": {
+                    "reference": "https://hostname/instance/api/FHIR/STU3/Practitioner/euc69RmkeUC5UjZOIGu0FiA3",
+                    "display": "Amanda Fahr"
+                },
+                "status": "tentative"
+            },
+            {
+                "actor": {
+                    "reference": "https://hostname/instance/api/FHIR/STU3/Location/e6gRswU5WJtj7msgU7NZiYw3",
+                    "display": "ABF Family Practice"
+                },
+                "status": "tentative"
+            }
+        ]
+    }, {
+        "resourceType": "Appointment",
+        "id": "ePjxkyjA8gju08Vwqc.iiAFHBGCmkucuk3O15LOr0KFg3",
+        "identifier": [
+            {
+                "system": "urn:oid:1.2.840.114350.1.13.861.1.7.3.698084.8",
+                "value": "10001659236"
+            }
+        ],
+        "status": "proposed",
+        "serviceCategory": {
+            "coding": [
+                {
+                    "system": "http://open.epic.com/FHIR/StructureDefinition/appointment-service-category",
+                    "code": "appointment",
+                    "display": "Appointment"
+                }
+            ],
+            "text": "appointment"
+        },
+        "serviceType": [
+            {
+                "coding": [
+                    {
+                        "system": "urn:oid:1.2.840.114350.1.13.861.1.7.2.808267",
+                        "code": "579",
+                        "display": "ABF Office Visit"
+                    }
+                ]
+            }
+        ],
+        "appointmentType": {
+            "coding": [
+                {
+                    "system": "http://hl7.org/fhir/v3/ActCode",
+                    "code": "AMB",
+                    "display": "Ambulatory"
+                }
+            ]
+        },
+        "reason": [
+            {
+                "coding": [
+                    {
+                        "system": "http://snomed.info/sct",
+                        "code": "271799000",
+                        "display": "Stomach"
+                    }
+                ],
+                "text": "I have a terrible stomach ache"
+            }
+        ],
+        "start": "2021-08-22T13:15:00Z",
+        "end": "2021-08-22T13:30:00Z",
+        "minutesDuration": 15,
+        "created": "2021-08-20",
+        "comment": "Patient instructions are spiffy!\n\nThis will get you to google!\n",
+        "participant": [
+            {
+                "actor": {
+                    "reference": "https://hostname/instance/api/FHIR/STU3/Patient/eFs2zvgmbGfgWFfHliSRYZA3",
+                    "display": "Michael Howey"
+                },
+                "status": "tentative"
+            },
+            {
+                "actor": {
+                    "reference": "https://hostname/instance/api/FHIR/STU3/Practitioner/euc69RmkeUC5UjZOIGu0FiA3",
+                    "display": "Amanda Fahr"
+                },
+                "status": "tentative"
+            },
+            {
+                "actor": {
+                    "reference": "https://hostname/instance/api/FHIR/STU3/Location/e6gRswU5WJtj7msgU7NZiYw3",
+                    "display": "ABF Family Practice"
+                },
+                "status": "tentative"
+            }
+        ]
+    }, {
+        "resourceType": "Appointment",
+        "id": "ePjxkyjA8gju08Vwqc.iiAFHBGCmkucuk3O15LOr0KFg3",
+        "identifier": [
+            {
+                "system": "urn:oid:1.2.840.114350.1.13.861.1.7.3.698084.8",
+                "value": "10001659236"
+            }
+        ],
+        "status": "proposed",
+        "serviceCategory": {
+            "coding": [
+                {
+                    "system": "http://open.epic.com/FHIR/StructureDefinition/appointment-service-category",
+                    "code": "appointment",
+                    "display": "Appointment"
+                }
+            ],
+            "text": "appointment"
+        },
+        "serviceType": [
+            {
+                "coding": [
+                    {
+                        "system": "urn:oid:1.2.840.114350.1.13.861.1.7.2.808267",
+                        "code": "579",
+                        "display": "ABF Office Visit"
+                    }
+                ]
+            }
+        ],
+        "appointmentType": {
+            "coding": [
+                {
+                    "system": "http://hl7.org/fhir/v3/ActCode",
+                    "code": "AMB",
+                    "display": "Ambulatory"
+                }
+            ]
+        },
+        "reason": [
+            {
+                "coding": [
+                    {
+                        "system": "http://snomed.info/sct",
+                        "code": "271799000",
+                        "display": "Headache"
+                    }
+                ],
+                "text": "I have a horrible headache"
+            }
+        ],
+        "start": "2021-08-22T13:15:00Z",
+        "end": "2021-08-22T13:30:00Z",
+        "minutesDuration": 15,
+        "created": "2021-08-20",
+        "comment": "Patient instructions are spiffy!\n\nThis will get you to google!\n",
+        "participant": [
+            {
+                "actor": {
+                    "reference": "https://hostname/instance/api/FHIR/STU3/Patient/eFs2zvgmbGfgWFfHliSRYZA3",
+                    "display": "Robyn Henry"
+                },
+                "status": "tentative"
+            },
+            {
+                "actor": {
+                    "reference": "https://hostname/instance/api/FHIR/STU3/Practitioner/euc69RmkeUC5UjZOIGu0FiA3",
+                    "display": "Amanda Fahr"
+                },
+                "status": "tentative"
+            },
+            {
+                "actor": {
+                    "reference": "https://hostname/instance/api/FHIR/STU3/Location/e6gRswU5WJtj7msgU7NZiYw3",
+                    "display": "ABF Family Practice"
+                },
+                "status": "tentative"
+            }
+        ]
+    }, {
+        "resourceType": "Appointment",
+        "id": "ePjxkyjA8gju08Vwqc.iiAFHBGCmkucuk3O15LOr0KFg3",
+        "identifier": [
+            {
+                "system": "urn:oid:1.2.840.114350.1.13.861.1.7.3.698084.8",
+                "value": "10001659236"
+            }
+        ],
+        "status": "proposed",
+        "serviceCategory": {
+            "coding": [
+                {
+                    "system": "http://open.epic.com/FHIR/StructureDefinition/appointment-service-category",
+                    "code": "appointment",
+                    "display": "Appointment"
+                }
+            ],
+            "text": "appointment"
+        },
+        "serviceType": [
+            {
+                "coding": [
+                    {
+                        "system": "urn:oid:1.2.840.114350.1.13.861.1.7.2.808267",
+                        "code": "579",
+                        "display": "ABF Office Visit"
+                    }
+                ]
+            }
+        ],
+        "appointmentType": {
+            "coding": [
+                {
+                    "system": "http://hl7.org/fhir/v3/ActCode",
+                    "code": "AMB",
+                    "display": "Ambulatory"
+                }
+            ]
+        },
+        "reason": [
+            {
+                "coding": [
+                    {
+                        "system": "http://snomed.info/sct",
+                        "code": "271799000",
+                        "display": "Injury"
+                    }
+                ],
+                "text": "I have terrible back pain"
+            }
+        ],
+        "start": "2021-08-22T13:15:00Z",
+        "end": "2021-08-22T13:30:00Z",
+        "minutesDuration": 15,
+        "created": "2021-08-20",
+        "comment": "Patient instructions are spiffy!\n\nThis will get you to google!\n",
+        "participant": [
+            {
+                "actor": {
+                    "reference": "https://hostname/instance/api/FHIR/STU3/Patient/eFs2zvgmbGfgWFfHliSRYZA3",
+                    "display": "Evelyn Heng"
+                },
+                "status": "tentative"
+            },
+            {
+                "actor": {
+                    "reference": "https://hostname/instance/api/FHIR/STU3/Practitioner/euc69RmkeUC5UjZOIGu0FiA3",
+                    "display": "Amanda Fahr"
+                },
+                "status": "tentative"
+            },
+            {
+                "actor": {
+                    "reference": "https://hostname/instance/api/FHIR/STU3/Location/e6gRswU5WJtj7msgU7NZiYw3",
+                    "display": "ABF Family Practice"
+                },
+                "status": "tentative"
+            }
+        ]
+    }, {
+        "resourceType": "Appointment",
+        "id": "ePjxkyjA8gju08Vwqc.iiAFHBGCmkucuk3O15LOr0KFg3",
+        "identifier": [
+            {
+                "system": "urn:oid:1.2.840.114350.1.13.861.1.7.3.698084.8",
+                "value": "10001659236"
+            }
+        ],
+        "status": "proposed",
+        "serviceCategory": {
+            "coding": [
+                {
+                    "system": "http://open.epic.com/FHIR/StructureDefinition/appointment-service-category",
+                    "code": "appointment",
+                    "display": "Appointment"
+                }
+            ],
+            "text": "appointment"
+        },
+        "serviceType": [
+            {
+                "coding": [
+                    {
+                        "system": "urn:oid:1.2.840.114350.1.13.861.1.7.2.808267",
+                        "code": "579",
+                        "display": "ABF Office Visit"
+                    }
+                ]
+            }
+        ],
+        "appointmentType": {
+            "coding": [
+                {
+                    "system": "http://hl7.org/fhir/v3/ActCode",
+                    "code": "AMB",
+                    "display": "Ambulatory"
+                }
+            ]
+        },
+        "reason": [
+            {
+                "coding": [
+                    {
+                        "system": "http://snomed.info/sct",
+                        "code": "271799000",
+                        "display": "Headache"
+                    }
+                ],
+                "text": "My headache is killing me"
+            }
+        ],
+        "start": "2021-08-22T13:15:00Z",
+        "end": "2021-08-22T13:30:00Z",
+        "minutesDuration": 15,
+        "created": "2021-08-20",
+        "comment": "Patient instructions are spiffy!\n\nThis will get you to google!\n",
+        "participant": [
+            {
+                "actor": {
+                    "reference": "https://hostname/instance/api/FHIR/STU3/Patient/eFs2zvgmbGfgWFfHliSRYZA3",
+                    "display": "Sundeep Kumar Tippavajjula"
+                },
+                "status": "tentative"
+            },
+            {
+                "actor": {
+                    "reference": "https://hostname/instance/api/FHIR/STU3/Practitioner/euc69RmkeUC5UjZOIGu0FiA3",
+                    "display": "Amanda Fahr"
+                },
+                "status": "tentative"
+            },
+            {
+                "actor": {
+                    "reference": "https://hostname/instance/api/FHIR/STU3/Location/e6gRswU5WJtj7msgU7NZiYw3",
+                    "display": "ABF Family Practice"
+                },
+                "status": "tentative"
+            }
+        ]
+    }, {
+        "resourceType": "Appointment",
+        "id": "ePjxkyjA8gju08Vwqc.iiAFHBGCmkucuk3O15LOr0KFg3",
+        "identifier": [
+            {
+                "system": "urn:oid:1.2.840.114350.1.13.861.1.7.3.698084.8",
+                "value": "10001659236"
+            }
+        ],
+        "status": "proposed",
+        "serviceCategory": {
+            "coding": [
+                {
+                    "system": "http://open.epic.com/FHIR/StructureDefinition/appointment-service-category",
+                    "code": "appointment",
+                    "display": "Appointment"
+                }
+            ],
+            "text": "appointment"
+        },
+        "serviceType": [
+            {
+                "coding": [
+                    {
+                        "system": "urn:oid:1.2.840.114350.1.13.861.1.7.2.808267",
+                        "code": "579",
+                        "display": "ABF Office Visit"
+                    }
+                ]
+            }
+        ],
+        "appointmentType": {
+            "coding": [
+                {
+                    "system": "http://hl7.org/fhir/v3/ActCode",
+                    "code": "AMB",
+                    "display": "Ambulatory"
+                }
+            ]
+        },
+        "reason": [
+            {
+                "coding": [
+                    {
+                        "system": "http://snomed.info/sct",
+                        "code": "271799000",
+                        "display": "Injury"
+                    }
+                ],
+                "text": "I hit my toe on the foot of a glass table"
+            }
+        ],
+        "start": "2021-08-22T13:15:00Z",
+        "end": "2021-08-22T13:30:00Z",
+        "minutesDuration": 15,
+        "created": "2021-08-20",
+        "comment": "Patient instructions are spiffy!\n\nThis will get you to google!\n",
+        "participant": [
+            {
+                "actor": {
+                    "reference": "https://hostname/instance/api/FHIR/STU3/Patient/eFs2zvgmbGfgWFfHliSRYZA3",
+                    "display": "Poornendra K Rai"
+                },
+                "status": "tentative"
+            },
+            {
+                "actor": {
+                    "reference": "https://hostname/instance/api/FHIR/STU3/Practitioner/euc69RmkeUC5UjZOIGu0FiA3",
+                    "display": "Amanda Fahr"
+                },
+                "status": "tentative"
+            },
+            {
+                "actor": {
+                    "reference": "https://hostname/instance/api/FHIR/STU3/Location/e6gRswU5WJtj7msgU7NZiYw3",
+                    "display": "ABF Family Practice"
+                },
+                "status": "tentative"
+            }
+        ]
+    }, {
+        "resourceType": "Appointment",
+        "id": "ePjxkyjA8gju08Vwqc.iiAFHBGCmkucuk3O15LOr0KFg3",
+        "identifier": [
+            {
+                "system": "urn:oid:1.2.840.114350.1.13.861.1.7.3.698084.8",
+                "value": "10001659236"
+            }
+        ],
+        "status": "proposed",
+        "serviceCategory": {
+            "coding": [
+                {
+                    "system": "http://open.epic.com/FHIR/StructureDefinition/appointment-service-category",
+                    "code": "appointment",
+                    "display": "Appointment"
+                }
+            ],
+            "text": "appointment"
+        },
+        "serviceType": [
+            {
+                "coding": [
+                    {
+                        "system": "urn:oid:1.2.840.114350.1.13.861.1.7.2.808267",
+                        "code": "579",
+                        "display": "ABF Office Visit"
+                    }
+                ]
+            }
+        ],
+        "appointmentType": {
+            "coding": [
+                {
+                    "system": "http://hl7.org/fhir/v3/ActCode",
+                    "code": "AMB",
+                    "display": "Ambulatory"
+                }
+            ]
+        },
+        "reason": [
+            {
+                "coding": [
+                    {
+                        "system": "http://snomed.info/sct",
+                        "code": "271799000",
+                        "display": "Injury"
+                    }
+                ],
+                "text": "I hurt myself playing basketball again."
+            }
+        ],
+        "start": "2021-08-22T13:15:00Z",
+        "end": "2021-08-22T13:30:00Z",
+        "minutesDuration": 15,
+        "created": "2021-08-20",
+        "comment": "Patient instructions are spiffy!\n\nThis will get you to google!\n",
+        "participant": [
+            {
+                "actor": {
+                    "reference": "https://hostname/instance/api/FHIR/STU3/Patient/eFs2zvgmbGfgWFfHliSRYZA3",
+                    "display": "Himanshu Arora"
+                },
+                "status": "tentative"
+            },
+            {
+                "actor": {
+                    "reference": "https://hostname/instance/api/FHIR/STU3/Practitioner/euc69RmkeUC5UjZOIGu0FiA3",
+                    "display": "Amanda Fahr"
+                },
+                "status": "tentative"
+            },
+            {
+                "actor": {
+                    "reference": "https://hostname/instance/api/FHIR/STU3/Location/e6gRswU5WJtj7msgU7NZiYw3",
+                    "display": "ABF Family Practice"
+                },
+                "status": "tentative"
+            }
+        ]
+    }]
