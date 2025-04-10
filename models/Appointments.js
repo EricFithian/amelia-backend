@@ -14,6 +14,12 @@ let serviceCodingSchema = new mongoose.Schema({
   display: {type: String, default: "Appointment"}
 })
 
+let serviceTypeSchema = new mongoose.Schema(
+  {
+    coding: [serviceTypeCodingSchema]
+  }
+)
+
 let serviceTypeCodingSchema = new mongoose.Schema({
     system: {type: String, default: "urn:oid:1.2.840.114350.1.13.861.1.7.2.808267"},
     code: {type: String, default: "579"},
@@ -79,11 +85,7 @@ let AppointmentsSchema = new mongoose.Schema({
   }, serviceCategory: {
     coding: [serviceCodingSchema],
     text: {type: String, default: "appointment"}
-  }, serviceType: [
-    {
-      coding: [serviceTypeCodingSchema]
-    }
-  ],
+  }, serviceType: [serviceTypeSchema],
   appointmentType: {
     coding: [appointmentTypeCodingSchema]
   }, reason: [appointmentTypeReasonSchema],
