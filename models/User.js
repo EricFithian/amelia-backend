@@ -20,6 +20,9 @@ const UserSchema = new mongoose.Schema({
   }, phoneNumber: {
     type: String,
     default: "123-867-5309"
+  }, securityQuestionsAnswers: {
+    type: Array,
+    default: [["What are the last four digits of your ssn number?", 1234], ["What is your pin number?", 9876]]
   }
 },{timestamps: true});
 

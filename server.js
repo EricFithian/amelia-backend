@@ -198,7 +198,7 @@ app.get('/:email', async (req, res) => {
     try {
         let currentUser
         currentUser = await User.findOne({email: req.params.email}) 
-        currentUser ? currentUser == currentUser : currentUser = await User.findOne({name: req.params.email})
+        currentUser ? currentUser == currentUser : currentUser = await User.findOne({name: req.params.name})
         console.log(currentUser);
         currentUser ? res.json(currentUser) : res.json(null)
     } catch(err) {
@@ -208,17 +208,19 @@ app.get('/:email', async (req, res) => {
 
 app.put('/', async(req, res) => {
     try {
-        console.log("This was hit");
-        console.log(req.body);
-        toBeUpdated = await User.findOne({email: req.body.email});
+        let toBeUpdated;
+        if(req.body.channel == "voice") {
+            toBeUpdated = await User.findOne({phoneNumber: req.body.phoneNumber})
+        } else {
+            toBeUpdated = await User.findOne({email: req.body.email});
+        }
         toBeUpdated.password = req.body.password;
         console.log(toBeUpdated);
         updatedUser = await User.findByIdAndUpdate(toBeUpdated._id, toBeUpdated);
         console.log(updatedUser);
-        res.status(200).json({result: `Updated the password for ${req.body.email}`});
+        res.status(200).json({result: `Updated the password for ${req.body.name}`});
     } catch(err) {
         console.log(err);
-
         res.status(403).json({result: res.redirect(`/${req.body.email}`)});
     }
 })
