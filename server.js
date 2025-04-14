@@ -22,7 +22,7 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
 
-const {User, Wifi, Appointment} = require('./models')
+const {User, Wifi, Appointments} = require('./models')
 const optum = require('./optum.json')
 
 
