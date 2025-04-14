@@ -132,7 +132,7 @@ app.get('/clean-users', async(req, res) => {
 
 app.get('/appointments', async(req, res) => {
     try {
-        const appointment = await Appointment.find({});
+        const appointment = await Appointments.find({});
         console.log(appointment)
         res.status(201).json(appointment)
     } catch(err) {
@@ -142,7 +142,7 @@ app.get('/appointments', async(req, res) => {
 
 app.get('/appointments/user/:name', async(req, res) => {
     try {
-        const appointments = await Appointment.find({patient: req.params.name});
+        const appointments = await Appointments.find({patient: req.params.name});
         console.log(appointments)
         res.status(201).json(appointments)
     } catch(err) {
@@ -152,7 +152,7 @@ app.get('/appointments/user/:name', async(req, res) => {
 
 app.get('/appointments/:reason', async(req, res) => {
     try {
-        const appointment = await Appointment.findOne({reason: [{ text:req.params.reason}]});
+        const appointment = await Appointments.findOne({reason: [{ text:req.params.reason}]});
         console.log(appointment)
         res.status(201).json(appointment)
     } catch(err) {
@@ -162,7 +162,7 @@ app.get('/appointments/:reason', async(req, res) => {
 
 app.post('/appointments', async(req, res) => {
     try {
-        const appointment = await Appointment.create(req.body);
+        const appointment = await Appointments.create(req.body);
         console.log(appointment)
         res.status(201).json({'status': `I have created a new appointment for ${req.body.patient}`})
     } catch(err) {
@@ -173,7 +173,7 @@ app.post('/appointments', async(req, res) => {
 app.get('/seed_appointments', async(req, res) => {
     try {
         log.info(optum)
-        const appointments = await Appointment.create(optum);
+        const appointments = await Appointments.create(optum);
         log.info(appointments)
         res.status(201).redirect('./appointments')
     } catch(err) {
@@ -183,9 +183,9 @@ app.get('/seed_appointments', async(req, res) => {
 
 app.put('/appointments/:text', async(req, res) => {
     try {
-        toBeUpdated = await Appointment.findOne({reason: [{text: req.params.text}]});
+        toBeUpdated = await Appointments.findOne({reason: [{text: req.params.text}]});
         update = req.body
-        updatedUser = await Appointment.findByIdAndUpdate(toBeUpdated._id, update);
+        updatedUser = await Appointments.findByIdAndUpdate(toBeUpdated._id, update);
         res.status(200).json({result: `Updated the appointment`});
     } catch(err) {
         console.log(err);
