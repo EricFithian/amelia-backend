@@ -8,9 +8,6 @@ let AppointmentsSchema = new mongoose.Schema({
   patient: {
     type: String,
     default: "Eric Fithian"
-  }, resourceType: {
-    type: String,
-    default: "Appointment"
   }, status: {
     type: String,
     default: "proposed"
