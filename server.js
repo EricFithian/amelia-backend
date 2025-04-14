@@ -132,7 +132,7 @@ app.get('/clean-users', async(req, res) => {
 
 app.get('/appointments', async(req, res) => {
     try {
-        const appointment = await Appointment.find([]);
+        const appointment = await Appointment.find({});
         console.log(appointment)
         res.status(201).json(appointment)
     } catch(err) {
@@ -142,7 +142,7 @@ app.get('/appointments', async(req, res) => {
 
 app.get('/appointments/user/:name', async(req, res) => {
     try {
-        const appointments = await Appointment.find({participant: [{ actor: {display: req.params.name}}]});
+        const appointments = await Appointment.find({patient: req.params.name});
         console.log(appointments)
         res.status(201).json(appointments)
     } catch(err) {
@@ -164,7 +164,7 @@ app.post('/appointments', async(req, res) => {
     try {
         const appointment = await Appointment.create(req.body);
         console.log(appointment)
-        res.status(201).json({'status': `I have created a new appointment for ${req.body.patientName}`})
+        res.status(201).json({'status': `I have created a new appointment for ${req.body.patient}`})
     } catch(err) {
         res.status(403).json({result: err})
     }
