@@ -181,12 +181,12 @@ app.get('/seed_appointments', async(req, res) => {
     }
 })
 
-app.put('/appointments/:text', async(req, res) => {
+app.put('/appointments/:patient/:time', async(req, res) => {
     try {
-        toBeUpdated = await Appointments.findOne({reason: [{text: req.params.text}]});
-        update = req.body
-        updatedUser = await Appointments.findByIdAndUpdate(toBeUpdated._id, update);
-        res.status(200).json({result: `Updated the appointment`});
+        toBeUpdated = await Appointments.findOne({patient: req.params.patient, start: req.params.time});
+        toBeUpdated.start = req.params.time
+        updatedUser = await Appointments.findByIdAndUpdate(toBeUpdated._id, toBeUpdated);
+        res.status(200).json({result: `Updated the appointment for ${req.params.patient}`});
     } catch(err) {
         console.log(err);
         res.status(403).json({result: res.redirect(`/${req.body.email}`)});
