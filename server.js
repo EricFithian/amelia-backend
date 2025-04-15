@@ -181,10 +181,10 @@ app.get('/seed_appointments', async(req, res) => {
     }
 })
 
-app.put('/appointments/:patient/:time', async(req, res) => {
+app.put('/appointments/:patient/:time/:new_time', async(req, res) => {
     try {
         toBeUpdated = await Appointments.findOne({patient: req.params.patient, start: req.params.time});
-        toBeUpdated.start = req.params.time
+        toBeUpdated.start = req.params.new_time
         updatedUser = await Appointments.findByIdAndUpdate(toBeUpdated._id, toBeUpdated);
         res.status(200).json({result: `Updated the appointment for ${req.params.patient}`});
     } catch(err) {
