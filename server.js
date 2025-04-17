@@ -1,6 +1,6 @@
 require("dotenv").config();
 const moment = require('moment');
-
+const mongoose = require('mongoose')
 // import express
 const express = require("express");
 const cors = require("cors");
@@ -36,7 +36,9 @@ app.use(
     })
 );
 
-const {User, Wifi, Appointments} = require('./models')
+// console.log(session);
+// console.log(MongoStore);
+const {User, Wifi, Appointments, Sessions} = require('./models')
 const optum = require('./optum.json')
 
 
@@ -92,6 +94,19 @@ app.post("/login", async function (req, res) {
         return next();
     }
 });
+
+app.get('/sessions', async (req, res) => {
+    try {
+        await mongoose.connect(MONGODB_URI)
+        const user_sessions = mongoose.connection.collection('sessions');
+        console.log(user_sessions)
+        const Session = await user_sessions.find({}).toArray()
+        console.log(Session);
+        res.status(200).json(Session);
+    } catch(err) {
+        res.status(400).json(err);
+    }
+})
 
 app.get('/frontend', async (req, res) => {
     try {
