@@ -6,8 +6,10 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const bodyParser = require('body-parser');
+const session = require('express-session')
+const MongoStore = require('connect-mongo');
 const app = express();
-const { PORT = 4321 } = process.env;
+const { PORT = 4321, MONGODB_URI } = process.env;
 
 ///////////////////////////////
 // MIDDLEWARE
@@ -21,6 +23,18 @@ app.use(morgan("dev")); // logging for development
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
+app.use(
+    session({
+        store: MongoStore.create({ mongoUrl: MONGODB_URI }),
+        secret: "super secret",
+        resave: false,
+        saveUninitialized: false,
+        // configure the experation of the cookie
+        cookie: {
+            maxAge: 1000 * 60 * 60 * 24 * 7 * 2, // two weeks
+        },
+    })
+);
 
 const {User, Wifi, Appointments} = require('./models')
 const optum = require('./optum.json')
@@ -50,6 +64,34 @@ app.get('/wifi-access', async (req, res) => {
         res.status(400).json(err);
     }
 })
+
+app.post("/login", async function (req, res) {
+    try {
+        const foundUser = await User.findOne({ email: req.body.email });
+
+        if (!foundUser) return res.send("The password or the username is invalid");
+        
+        let match
+        foundUser.password == req.body.password ? match = true : match = false
+    
+        // if not match send error
+        if (!match) return res.send("The password or the username is invalid");
+    
+        // if match create the session and redirect to home\
+        // here we have created the key card
+        req.session.currentUser = {
+            user_info: foundUser
+        };
+
+        console.log(req.session);
+    
+        return res.json(`You created a user, ${foundUser}`);
+    } catch (err) {
+        console.log(err);
+        req.error = err;
+        return next();
+    }
+});
 
 app.get('/frontend', async (req, res) => {
     try {
