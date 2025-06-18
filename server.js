@@ -38,7 +38,7 @@ app.use(
 
 // console.log(session);
 // console.log(MongoStore);
-const {User, Wifi, Appointments, Sessions} = require('./models')
+const {User, Wifi, Appointments, Sessions, Onboarding} = require('./models')
 const optum = require('./optum.json')
 
 
@@ -62,6 +62,15 @@ app.get('/wifi-access', async (req, res) => {
         console.log(req.params)
         console.log(req.params.count);
         res.status(200).json(allWifi);
+    } catch(err) {
+        res.status(400).json(err);
+    }
+})
+
+app.get('/onboarding', async (req, res) => {
+    try {
+        const allOnboarding = await Onboarding.find({});
+        res.status(200).json(allOnboarding);
     } catch(err) {
         res.status(400).json(err);
     }
@@ -145,6 +154,17 @@ app.post('/wifi-access', async (req, res) => {
         console.log(req.body);
         const newWifi = await Wifi.create(req.body);
         console.log(newWifi);
+        res.status(200).json({result: 'The post to your database was successful'})
+    } catch(err) {
+        res.status(400).json({result: err});
+    }
+})
+
+app.post('/onboarding', async (req, res) => {
+    try {
+        console.log(req.body);
+        const newOnboarding = await Onboarding.create(req.body);
+        console.log(newOnboarding);
         res.status(200).json({result: 'The post to your database was successful'})
     } catch(err) {
         res.status(400).json({result: err});
