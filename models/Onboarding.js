@@ -10,16 +10,13 @@ const OnboardingSchema = new mongoose.Schema({
   ssn: {
     type: String
   },
-  vendor: {
-    type: String
-  },
   dob: {
     type: String
   },
-  photo: {
+  typeOfEmployee: {
     type: String
   },
-  image: {
+  photo: {
     type: String,
     default: "iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=="
   }
