@@ -15,10 +15,6 @@ const OnboardingSchema = new mongoose.Schema({
   },
   typeOfEmployee: {
     type: String
-  },
-  photo: {
-    type: String,
-    default: "iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=="
   }
 },{timestamps: true});
 
