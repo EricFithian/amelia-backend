@@ -175,6 +175,7 @@ app.get('/reset', async(req, res) => {
     try {
         await User.deleteMany({});
         await Wifi.deleteMany({});
+        await Onboarding.deleteMany({});
         res.redirect('/');
     } catch(err) {
         res.status(403).json({result: err})
