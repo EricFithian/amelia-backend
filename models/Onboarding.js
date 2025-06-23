@@ -19,6 +19,9 @@ const OnboardingSchema = new mongoose.Schema({
   photo: {
     type: String,
     default: "iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=="
+  }, photoType: {
+    type: String,
+    default: "img/png"
   }
 },{timestamps: true});
 
