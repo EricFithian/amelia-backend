@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 ///////////////////////////////
 // MODELS
 ////////////////////////////////
-const WifiSchema = new mongoose.Schema({
+const WifiAdvancedSchema = new mongoose.Schema({
   number: {
     type: String
   },
@@ -21,9 +21,12 @@ const WifiSchema = new mongoose.Schema({
   },
   duration: {
     type: String
+  }, visitors: {
+    type: Array,
+    default: []
   }
 },{timestamps: true});
 
-const Wifi = mongoose.model("Wifi", WifiSchema);
+const WifiAdvanced = mongoose.model("WifiAdvanced", WifiAdvancedSchema);
 
-module.exports = Wifi
+module.exports = WifiAdvanced

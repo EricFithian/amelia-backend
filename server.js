@@ -38,7 +38,7 @@ app.use(
 
 // console.log(session);
 // console.log(MongoStore);
-const {User, Wifi, Appointments, Sessions, Onboarding} = require('./models')
+const {User, Wifi, WifiAdvanced, Appointments, Sessions, Onboarding} = require('./models')
 const optum = require('./optum.json')
 
 
@@ -59,6 +59,17 @@ app.get('/', async (req, res) => {
 app.get('/wifi-access', async (req, res) => {
     try {
         const allWifi = await Wifi.find({});
+        console.log(req.params)
+        console.log(req.params.count);
+        res.status(200).json(allWifi);
+    } catch(err) {
+        res.status(400).json(err);
+    }
+})
+
+app.get('/wifi-access-advanced', async (req, res) => {
+    try {
+        const allWifi = await WifiAdvanced.find({});
         console.log(req.params)
         console.log(req.params.count);
         res.status(200).json(allWifi);
@@ -154,6 +165,17 @@ app.post('/wifi-access', async (req, res) => {
         console.log(req.body);
         const newWifi = await Wifi.create(req.body);
         console.log(newWifi);
+        res.status(200).json({result: 'The post to your database was successful'})
+    } catch(err) {
+        res.status(400).json({result: err});
+    }
+})
+
+app.post('/wifi-access-advanced', async (req, res) => {
+    try {
+        // console.log(req.body);
+        const newWifi = await WifiAdvanced.create(req.body);
+        // console.log(newWifi);
         res.status(200).json({result: 'The post to your database was successful'})
     } catch(err) {
         res.status(400).json({result: err});
