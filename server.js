@@ -173,8 +173,6 @@ app.post('/wifi-access', async (req, res) => {
 
 app.post('/wifi-access-advanced', async (req, res) => {
     try {
-        body = JSON.parse(req.body)
-        console.log(body);
         const newWifi = await WifiAdvanced.create(req.body);
         console.log(newWifi);
         res.status(200).json({result: 'The post to your database was successful'})
