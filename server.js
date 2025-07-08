@@ -173,9 +173,7 @@ app.post('/wifi-access', async (req, res) => {
 
 app.post('/wifi-access-advanced', async (req, res) => {
     try {
-        body = req.body
-        my_visitors = JSON.parse(body.visitors)
-        body.visitors = my_visitors
+        body = JSON.parse(req.body)
         console.log(body);
         const newWifi = await WifiAdvanced.create(body);
         console.log(newWifi);
