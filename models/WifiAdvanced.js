@@ -5,22 +5,19 @@ const mongoose = require("mongoose");
 ////////////////////////////////
 const WifiAdvancedSchema = new mongoose.Schema({
   number: {
-    type: String
-  },
-  password: {
-    type: String
+    type: Number
   },
   vendor: {
     type: String
   },
   startDate: {
-    type: String
+    type: Date
   },
   endDate: {
-    type: String
+    type: Date
   },
   duration: {
-    type: String
+    type: Number
   }, visitors: {
     type: Array,
     default: []
