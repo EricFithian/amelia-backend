@@ -11,8 +11,8 @@ const WifiAdvancedSchema = new mongoose.Schema({
   endDate: String,
   duration: Number, 
   visitors: [{
-    guest: String,
-    password: String
+    guests: String,
+    passwords: String
   }]
 },{timestamps: true});
 
