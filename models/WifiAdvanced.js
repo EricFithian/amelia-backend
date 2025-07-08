@@ -3,6 +3,10 @@ const mongoose = require("mongoose");
 ///////////////////////////////
 // MODELS
 ////////////////////////////////
+const visitorSchema = new mongoose.Schema({
+  guest: String,
+  password: String
+})
 const WifiAdvancedSchema = new mongoose.Schema({
   number: {
     type: Number
@@ -18,12 +22,7 @@ const WifiAdvancedSchema = new mongoose.Schema({
   },
   duration: {
     type: Number
-  }, visitors: [
-    {
-      guest: String,
-      password: String
-    }
-  ]
+  }, visitors: [visitorSchema]
 },{timestamps: true});
 
 const WifiAdvanced = mongoose.model("WifiAdvanced", WifiAdvancedSchema);
