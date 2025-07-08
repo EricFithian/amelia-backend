@@ -18,10 +18,12 @@ const WifiAdvancedSchema = new mongoose.Schema({
   },
   duration: {
     type: Number
-  }, visitors: {
-    type: [{guest: String, password: String}],
-    default: []
-  }
+  }, visitors: [
+    {
+      guest: String,
+      password: String
+    }
+  ]
 },{timestamps: true});
 
 const WifiAdvanced = mongoose.model("WifiAdvanced", WifiAdvancedSchema);
