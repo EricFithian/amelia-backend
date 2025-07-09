@@ -2,6 +2,7 @@ require("dotenv").config();
 const moment = require('moment');
 const mongoose = require('mongoose')
 // import express
+const JSON5 = require('json5')
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
@@ -175,8 +176,7 @@ app.post('/wifi-access-advanced', async (req, res) => {
     try {
         if (typeof req.body.visitors.guests === 'string') {
             try {
-              req.body.visitors.guests = JSON.parse(req.body.visitors.guests);
-              app.use(express.json())
+              req.body.visitors.guests = JSON5.parse(req.body.visitors.guests);
             } catch (err) {
               console.error('Invalid JSON in visitors field', err);
               return res.status(400).send('Invalid guests JSON');
@@ -184,7 +184,8 @@ app.post('/wifi-access-advanced', async (req, res) => {
           }          
         if (typeof req.body.visitors.passwords === 'string') {
             try {
-              req.body.visitors.passwords = JSON.parse(req.body.visitors.passwords);
+              req.body.visitors.passwords = JSON5.parse(req.body.visitors.passwords)
+              ;
               app.use(express.json())
             } catch (err) {
               console.error('Invalid JSON in visitors field', err);
