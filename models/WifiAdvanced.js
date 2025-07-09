@@ -10,10 +10,10 @@ const WifiAdvancedSchema = new mongoose.Schema({
   startDate: String,
   endDate: String,
   duration: Number, 
-  visitors: {
+  visitors: new mongoose.Schema({
     guests: [String],
     passwords: [String]
-  }
+  })
 },{timestamps: true});
 
 const WifiAdvanced = mongoose.model("WifiAdvanced", WifiAdvancedSchema);
