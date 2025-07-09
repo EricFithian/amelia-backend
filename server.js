@@ -173,14 +173,22 @@ app.post('/wifi-access', async (req, res) => {
 
 app.post('/wifi-access-advanced', async (req, res) => {
     try {
-        // if (typeof req.body.visitors === 'string') {
-        //     try {
-        //       req.body.visitors = JSON.parse(req.body.visitors);
-        //     } catch (err) {
-        //       console.error('Invalid JSON in visitors field', err);
-        //       return res.status(400).send('Invalid visitors JSON');
-        //     }
-        //   }          
+        if (typeof req.body.visitors.guests === 'string') {
+            try {
+              req.body.visitors.guests = JSON.parse(req.body.visitors.guests);
+            } catch (err) {
+              console.error('Invalid JSON in visitors field', err);
+              return res.status(400).send('Invalid guests JSON');
+            }
+          }          
+        if (typeof req.body.visitors.passwords === 'string') {
+            try {
+              req.body.visitors.passwords = JSON.parse(req.body.visitors.passwords);
+            } catch (err) {
+              console.error('Invalid JSON in visitors field', err);
+              return res.status(400).send('Invalid passwords JSON');
+            }
+          }          
         const newWifi = await WifiAdvanced.create(req.body);
         console.log(newWifi);
         res.status(200).json({result: 'The post to your database was successful'})
