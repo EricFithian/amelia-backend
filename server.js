@@ -176,7 +176,21 @@ app.post('/wifi-access-advanced', async (req, res) => {
     try {
         if (typeof req.body.visitors.guests === 'string') {
             try {
-              req.body.visitors.guests = JSON5.parse(req.body.visitors.guests);
+              req.body.visitors.guests = JSON.parse(req.body.visitors.guests);
+              await WifiAdvanced.create({
+                "number": 4,
+                "vendor": "soundhound",
+                "startDate": "2025-07-08",
+                "endDate": "2025-07-12",
+                "duration": 4,
+                "visitors": {
+                "guests": [
+                    "Eric"
+                ],
+                "passwords": [
+                    "abc"
+                ]                
+            }})
             } catch (err) {
               console.error('Invalid JSON in visitors field', err);
               return res.status(400).send('Invalid guests JSON');
@@ -184,9 +198,21 @@ app.post('/wifi-access-advanced', async (req, res) => {
           }          
         if (typeof req.body.visitors.passwords === 'string') {
             try {
-              req.body.visitors.passwords = JSON5.parse(req.body.visitors.passwords)
-              ;
-              app.use(express.json())
+              req.body.visitors.passwords = JSON.parse(req.body.visitors.passwords)
+              await WifiAdvanced.create({
+                "number": 4,
+                "vendor": "soundhound",
+                "startDate": "2025-07-08",
+                "endDate": "2025-07-12",
+                "duration": 4,
+                "visitors": {
+                "guests": [
+                    "Eric"
+                ],
+                "passwords": [
+                    "abc"
+                ]                
+            }})
             } catch (err) {
               console.error('Invalid JSON in visitors field', err);
               return res.status(400).send('Invalid passwords JSON');

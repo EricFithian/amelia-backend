@@ -22,6 +22,12 @@ const OnboardingSchema = new mongoose.Schema({
   }, photoType: {
     type: String,
     default: "img/jpeg"
+  }, email: {
+    type: String,
+    default: "email@soundhound.com"
+  }, city: {
+    type: String,
+    default: "NYC"
   }
 },{timestamps: true});
 
