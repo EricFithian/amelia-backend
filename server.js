@@ -241,9 +241,9 @@ app.post('/payment_details', async (req, res) => {
     }
 })
 
-app.put('/payment_details', async (req, res) => {
+app.put('/payment_details/:email', async (req, res) => {
     try {
-        let paymentUpdate = await PaymentDetails.findOne({email: req.body.email});
+        let paymentUpdate = await PaymentDetails.findOne({accountEmail: req.params.email});
         if(req.body.paymentFrequency && req.body.paymentType) {
             paymentUpdate.paymentFrequency = req.body.paymentFrequency
             paymentUpdate.paymentType = req.body.paymentType
