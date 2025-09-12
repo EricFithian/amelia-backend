@@ -234,7 +234,7 @@ app.post('/payment_details', async (req, res) => {
 
 app.put('/payment_details', async (req, res) => {
     try {
-        paymentUpdate = await PaymentDetails.findOne({email: req.body.email});
+        let paymentUpdate = await PaymentDetails.findOne({email: req.body.email});
         if(req.body.paymentFrequency && req.body.paymentType) {
             paymentUpdate.paymentFrequency = req.body.paymentFrequency
             paymentUpdate.paymentType = req.body.paymentType
@@ -245,8 +245,31 @@ app.put('/payment_details', async (req, res) => {
         } else {
             return res.json({error: `I did not receive any paymentType or paymentFrequency in the request`})
         }
-        updatedUser = await User.findByIdAndUpdate(paymentUpdate._id, toBeUpdated)
-        console.log(newPaymentDetails);
+        updatedUser = await User.findByIdAndUpdate(paymentUpdate._id, paymentUpdate)
+        console.log(updatedUser);
+        res.status(200).json({result: 'The post to your database was successful', error: null})
+    } catch(err) {
+        res.status(400).json({result: err});
+    }
+})
+
+app.put('/beneficiary', async (req, res) => {
+    try {
+        let beneficiaryInfo = await Beneficiary.findOne({emailOfPolicyHolder: req.body.emailOfPolicyHolder});
+        if(req.body.nameOfBeneficiary) {
+            beneficiaryInfo.nameOfBeneficiary = req.body.nameOfBeneficiary
+        }
+        if(req.body.emailOfBeneficiary) {
+            beneficiaryInfo.emailOfBeneficiary = req.body.emailOfBeneficiary
+        }
+        if(req.body.addressOfBeneficiary) {
+            beneficiaryInfo.addressOfBeneficiary = req.body.addressOfBeneficiary
+        }
+        if(req.body.phoneNumberOfBeneficiary) {
+            beneficiaryInfo.phoneNumberOfBeneficiary = req.body.phoneNumberOfBeneficiary
+        }
+        updatedBeneficiary = await User.findByIdAndUpdate(paymentUpdate._id, beneficiaryInfo)
+        console.log(beneficiaryInfo);
         res.status(200).json({result: 'The post to your database was successful', error: null})
     } catch(err) {
         res.status(400).json({result: err});
