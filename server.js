@@ -221,6 +221,17 @@ app.post('/beneficiary', async (req, res) => {
     }
 })
 
+app.post('/payment_details', async (req, res) => {
+    try {
+        console.log(req.body);
+        const newPayentDetails = await PaymentDetails.create(req.body);
+        console.log(newPayentDetails);
+        res.status(200).json({result: 'The post to your database was successful', error: null})
+    } catch(err) {
+        res.status(400).json({result: err});
+    }
+})
+
 app.put('/payment_details', async (req, res) => {
     try {
         paymentUpdate = await PaymentDetails.findOne({email: req.body.email});
