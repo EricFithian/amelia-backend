@@ -117,7 +117,7 @@ app.get('/beneficiary', async (req, res) => {
 
 app.get('/beneficiary/:email', async (req, res) => {
     try {
-        const singleBenfit = await Beneficiary.findOne({emailOfPolicyHolder: req.params.emailOfPolicyHolder});
+        const singleBenfit = await Beneficiary.findOne({emailOfPolicyHolder: req.params.email});
         res.status(200).json({beneficiary: singleBenfit});
     } catch(err) {
         res.status(400).json(err);
