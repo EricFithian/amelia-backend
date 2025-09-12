@@ -262,9 +262,9 @@ app.put('/payment_details', async (req, res) => {
     }
 })
 
-app.put('/beneficiary', async (req, res) => {
+app.put('/beneficiary/email', async (req, res) => {
     try {
-        let beneficiaryInfo = await Beneficiary.findOne({emailOfPolicyHolder: req.body.emailOfPolicyHolder});
+        let beneficiaryInfo = await Beneficiary.findOne({emailOfPolicyHolder: req.params.email});
         if(req.body.nameOfBeneficiary) {
             beneficiaryInfo.nameOfBeneficiary = req.body.nameOfBeneficiary
         }
