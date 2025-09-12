@@ -4,21 +4,21 @@ const mongoose = require("mongoose");
 // MODELS
 ////////////////////////////////
 const BeneficiarySchema = new mongoose.Schema({
-  nameOfPetitioner: {
-    type: String
-  },
-  petitionerEmail: {
+  nameOfBeneficiary: {
     type: String,
+    default: "None"
   },
-  typeOfClaim: {
+  emailOfPolicyHolder: {
     type: String,
-  },
-  status: {
+  }, emailOfBeneficiary: {
     type: String,
-    default: "In process"
-  },
-  notes: {
-    type: String
+    default: "None"
+  }, addressOfBeneficiary: {
+    type: String,
+    default: "None"
+  }, phoneNumberOfBeneficiary: {
+    type: String,
+    default: "None"
   }
 },{timestamps: true});
 
