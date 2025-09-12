@@ -1,0 +1,27 @@
+const mongoose = require("mongoose");
+
+///////////////////////////////
+// MODELS
+////////////////////////////////
+const BeneficiarySchema = new mongoose.Schema({
+  nameOfPetitioner: {
+    type: String
+  },
+  petitionerEmail: {
+    type: String,
+  },
+  typeOfClaim: {
+    type: String,
+  },
+  status: {
+    type: String,
+    default: "In process"
+  },
+  notes: {
+    type: String
+  }
+},{timestamps: true});
+
+const Beneficiary = mongoose.model("Beneficiary", BeneficiarySchema);
+
+module.exports = Beneficiary

@@ -39,7 +39,7 @@ app.use(
 
 // console.log(session);
 // console.log(MongoStore);
-const {User, Wifi, WifiAdvanced, Appointments, Sessions, Onboarding} = require('./models')
+const {User, Wifi, WifiAdvanced, Appointments, Sessions, Onboarding, PaymentDetails, ClaimStatus, Beneficiary} = require('./models')
 const optum = require('./optum.json')
 
 
@@ -83,6 +83,33 @@ app.get('/onboarding', async (req, res) => {
     try {
         const allOnboarding = await Onboarding.find({});
         res.status(200).json(allOnboarding);
+    } catch(err) {
+        res.status(400).json(err);
+    }
+})
+
+app.get('/payment_details', async (req, res) => {
+    try {
+        const payment_details = await PaymentDetails.find({});
+        res.status(200).json({payment_details: payment_details, error: null});
+    } catch(err) {
+        res.status(400).json(err);
+    }
+})
+
+app.get('/claim_status', async (req, res) => {
+    try {
+        const claim_status = await ClaimStatus.find({});
+        res.status(200).json({claim_statuses: claim_status, error: null});
+    } catch(err) {
+        res.status(400).json(err);
+    }
+})
+
+app.get('/beneficiary', async (req, res) => {
+    try {
+        const beneficiary = await Beneficiary.find({});
+        res.status(200).json({beneficiaries: beneficiary, error: null});
     } catch(err) {
         res.status(400).json(err);
     }
@@ -166,6 +193,49 @@ app.post('/wifi-access', async (req, res) => {
         console.log(req.body);
         const newWifi = await Wifi.create(req.body);
         console.log(newWifi);
+        res.status(200).json({result: 'The post to your database was successful', error: null})
+    } catch(err) {
+        res.status(400).json({result: err});
+    }
+})
+
+app.post('/claim_status', async (req, res) => {
+    try {
+        console.log(req.body);
+        const newClaim = await ClaimStatus.create(req.body);
+        console.log(newClaim);
+        res.status(200).json({result: 'The post to your database was successful', error: null})
+    } catch(err) {
+        res.status(400).json({result: err});
+    }
+})
+
+app.post('/beneficiary', async (req, res) => {
+    try {
+        console.log(req.body);
+        const newBeneficiary = await Beneficiary.create(req.body);
+        console.log(newBeneficiary);
+        res.status(200).json({result: 'The post to your database was successful', error: null})
+    } catch(err) {
+        res.status(400).json({result: err});
+    }
+})
+
+app.put('/payment_details', async (req, res) => {
+    try {
+        paymentUpdate = await PaymentDetails.findOne({email: req.body.email});
+        if(req.body.paymentFrequency && req.body.paymentType) {
+            paymentUpdate.paymentFrequency = req.body.paymentFrequency
+            paymentUpdate.paymentType = req.body.paymentType
+        } else if(req.body.paymentFrequency) {
+            paymentUpdate.paymentFrequency = req.body.paymentFrequency
+        } else if(req.body.paymentType) {
+            paymentUpdate.paymentType = req.body.paymentType
+        } else {
+            return res.json({error: `I did not receive any paymentType or paymentFrequency in the request`})
+        }
+        updatedUser = await User.findByIdAndUpdate(paymentUpdate._id, toBeUpdated)
+        console.log(newPaymentDetails);
         res.status(200).json({result: 'The post to your database was successful', error: null})
     } catch(err) {
         res.status(400).json({result: err});

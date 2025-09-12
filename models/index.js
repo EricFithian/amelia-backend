@@ -4,11 +4,17 @@ const Wifi = require('./Wifi');
 const WifiAdvanced = require('./WifiAdvanced');
 const Appointments = require('./Appointments')
 const Onboarding = require('./Onboarding')
+const Beneficiary = require('./Beneficiary')
+const ClaimStatus = require('./ClaimStatus')
+const PaymentDetails = require('./PaymentDetails')
 
 module.exports = {
     User,
     Wifi,
     Appointments,
     Onboarding,
-    WifiAdvanced
+    WifiAdvanced,
+    Beneficiary,
+    ClaimStatus,
+    PaymentDetails
 }
