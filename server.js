@@ -108,7 +108,7 @@ app.get('/claim_status', async (req, res) => {
 
 app.get('/claim_status/:email', async (req, res) => {
     try {
-        const users_claim_status = await ClaimStatus.find({petitionerEmail: req.body.email});
+        const users_claim_status = await ClaimStatus.findOne({petitionerEmail: req.body.email});
         res.status(200).json({claim_status: users_claim_status, error: null});
     } catch(err) {
         res.status(400).json(err);
