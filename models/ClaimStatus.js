@@ -10,9 +10,6 @@ const ClaimStatusSchema = new mongoose.Schema({
   petitionerEmail: {
     type: String,
   },
-  typeOfClaim: {
-    type: String,
-  },
   status: {
     type: String,
     default: "In process"
