@@ -39,7 +39,7 @@ app.use(
 
 // console.log(session);
 // console.log(MongoStore);
-const {User, Wifi, WifiAdvanced, Appointments, Sessions, Onboarding, PaymentDetails, ClaimStatus, Beneficiary} = require('./models')
+const {User, Insurable, Wifi, WifiAdvanced, Appointments, Sessions, Onboarding, PaymentDetails, ClaimStatus, Beneficiary} = require('./models')
 const optum = require('./optum.json')
 
 
@@ -92,6 +92,15 @@ app.get('/payment_details', async (req, res) => {
     try {
         const payment_details = await PaymentDetails.find({});
         res.status(200).json({payment_details: payment_details, error: null});
+    } catch(err) {
+        res.status(400).json(err);
+    }
+})
+
+app.get('/insurable', async (req, res) => {
+    try {
+        const canBeInsured = await Insurable.find({});
+        res.status(200).json({canBeInsured: canBeInsured, error: null});
     } catch(err) {
         res.status(400).json(err);
     }
@@ -222,6 +231,17 @@ app.post('/claim_status', async (req, res) => {
         console.log(req.body);
         const newClaim = await ClaimStatus.create(req.body);
         console.log(newClaim);
+        res.status(200).json({result: 'The post to your database was successful', error: null})
+    } catch(err) {
+        res.status(400).json({result: err});
+    }
+})
+
+app.post('/insurable', async (req, res) => {
+    try {
+        console.log(req.body);
+        const newInsured = await Insurable.create(req.body);
+        console.log(newInsured);
         res.status(200).json({result: 'The post to your database was successful', error: null})
     } catch(err) {
         res.status(400).json({result: err});

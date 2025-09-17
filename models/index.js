@@ -6,6 +6,7 @@ const Appointments = require('./Appointments')
 const Onboarding = require('./Onboarding')
 const Beneficiary = require('./Beneficiary')
 const ClaimStatus = require('./ClaimStatus')
+const Insurable = require('./Insurable')
 const PaymentDetails = require('./PaymentDetails')
 
 module.exports = {
@@ -16,5 +17,6 @@ module.exports = {
     WifiAdvanced,
     Beneficiary,
     ClaimStatus,
-    PaymentDetails
+    PaymentDetails,
+    Insurable
 }
