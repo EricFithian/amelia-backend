@@ -126,7 +126,7 @@ app.get('/claim_status/:email', async (req, res) => {
 
 app.get('HoundifyMCP', async (req, res) => {
     try {
-        res.json({ results: {
+        res.send({ results: {
             "CommandKind": "CarControlCommand",
             "CarControlCommandKind": "CarControlDoorCommand",
             "CommandType": "OpenDoor",
