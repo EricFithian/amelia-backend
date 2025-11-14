@@ -124,6 +124,42 @@ app.get('/claim_status/:email', async (req, res) => {
     }
 })
 
+app.get('HoundifyMCP', async (req, res) => {
+    try {
+        res.status(200).json({ results: {
+            "CommandKind": "CarControlCommand",
+            "CarControlCommandKind": "CarControlDoorCommand",
+            "CommandType": "OpenDoor",
+            "DoorSelection": [
+                "Trunk"
+            ],
+            "AutoListen": false,
+            "ViewType": [
+                "Native",
+                "None"
+            ],
+            "ClientActionSucceededResult": {
+                "SpokenResponse": "Opening trunk.",
+                "SpokenResponseLong": "Opening trunk.",
+                "WrittenResponse": "Opening trunk.",
+                "WrittenResponseLong": "Opening trunk."
+            },
+            "ClientActionFailedResult": {
+                "SpokenResponse": "Could not open trunk.",
+                "SpokenResponseLong": "Could not open trunk.",
+                "WrittenResponse": "Could not open trunk.",
+                "WrittenResponseLong": "Could not open trunk."
+            },
+            "SpokenResponse": "Opening trunk.",
+            "SpokenResponseLong": "Opening trunk.",
+            "WrittenResponse": "Opening trunk.",
+            "WrittenResponseLong": "Opening trunk."
+        }, error: null});
+    } catch(err) {
+        res.status(400).json(err);
+    }
+})
+
 app.get('/beneficiary', async (req, res) => {
     try {
         const beneficiary = await Beneficiary.find({});
