@@ -8,6 +8,7 @@ const Beneficiary = require('./Beneficiary')
 const ClaimStatus = require('./ClaimStatus')
 const Insurable = require('./Insurable')
 const PaymentDetails = require('./PaymentDetails')
+const Houndify = require('./HoundifyMCP')
 
 module.exports = {
     User,
@@ -18,5 +19,6 @@ module.exports = {
     Beneficiary,
     ClaimStatus,
     PaymentDetails,
-    Insurable
+    Insurable,
+    Houndify
 }

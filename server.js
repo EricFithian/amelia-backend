@@ -39,7 +39,7 @@ app.use(
 
 // console.log(session);
 // console.log(MongoStore);
-const {User, Insurable, Wifi, WifiAdvanced, Appointments, Sessions, Onboarding, PaymentDetails, ClaimStatus, Beneficiary} = require('./models')
+const {User, Insurable, Houndify, Wifi, WifiAdvanced, Appointments, Sessions, Onboarding, PaymentDetails, ClaimStatus, Beneficiary} = require('./models')
 const optum = require('./optum.json')
 
 
@@ -97,6 +97,15 @@ app.get('/payment_details', async (req, res) => {
     }
 })
 
+app.get('/houndifyMCP', async (req, res) => {
+    try {
+        const houndify = await Houndify.find({});
+        res.status(200).json({results: houndify, error: null});
+    } catch(err) {
+        res.status(400).json(err);
+    }
+})
+
 app.get('/insurable', async (req, res) => {
     try {
         const canBeInsured = await Insurable.find({});
@@ -119,42 +128,6 @@ app.get('/claim_status/:email', async (req, res) => {
     try {
         const users_claim_status = await ClaimStatus.findOne({petitionerEmail: req.params.email});
         res.status(200).json({claim_status: users_claim_status, error: null});
-    } catch(err) {
-        res.status(400).json(err);
-    }
-})
-
-app.get('HoundifyMCP', async (req, res) => {
-    try {
-        res.json({ results: {
-            "CommandKind": "CarControlCommand",
-            "CarControlCommandKind": "CarControlDoorCommand",
-            "CommandType": "OpenDoor",
-            "DoorSelection": [
-                "Trunk"
-            ],
-            "AutoListen": false,
-            "ViewType": [
-                "Native",
-                "None"
-            ],
-            "ClientActionSucceededResult": {
-                "SpokenResponse": "Opening trunk.",
-                "SpokenResponseLong": "Opening trunk.",
-                "WrittenResponse": "Opening trunk.",
-                "WrittenResponseLong": "Opening trunk."
-            },
-            "ClientActionFailedResult": {
-                "SpokenResponse": "Could not open trunk.",
-                "SpokenResponseLong": "Could not open trunk.",
-                "WrittenResponse": "Could not open trunk.",
-                "WrittenResponseLong": "Could not open trunk."
-            },
-            "SpokenResponse": "Opening trunk.",
-            "SpokenResponseLong": "Opening trunk.",
-            "WrittenResponse": "Opening trunk.",
-            "WrittenResponseLong": "Opening trunk."
-        }, error: null});
     } catch(err) {
         res.status(400).json(err);
     }
@@ -256,6 +229,16 @@ app.post('/wifi-access', async (req, res) => {
         console.log(req.body);
         const newWifi = await Wifi.create(req.body);
         console.log(newWifi);
+        res.status(200).json({result: 'The post to your database was successful', error: null})
+    } catch(err) {
+        res.status(400).json({result: err});
+    }
+})
+
+app.post('/houndifyMCP', async (req, res) => {
+    try {
+        const houndifyPost = await Houndify.create(req.body);
+        console.log(houndifyPost);
         res.status(200).json({result: 'The post to your database was successful', error: null})
     } catch(err) {
         res.status(400).json({result: err});
