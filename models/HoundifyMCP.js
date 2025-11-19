@@ -29,20 +29,12 @@ const HoundifyMCP = new mongoose.Schema({
         type: String,
         default: "OpenDoor"
     },
-    DoorSelection: {
-        type: Array,
-        default: [
-            "Trunk"
-        ]
-    },  
+    DoorSelection: [String],  
     AutoListen: {
         type: Boolean,
         default: false
     },
-    ViewType: {
-        type: Array,
-        default: "CarControlDoorCommand"
-    },
+    ViewType: [String],
     CommandType: {
         type: String,
         default: [
