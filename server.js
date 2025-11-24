@@ -39,7 +39,7 @@ app.use(
 
 // console.log(session);
 // console.log(MongoStore);
-const {User, Insurable, Houndify, Wifi, WifiAdvanced, Appointments, Sessions, Onboarding, PaymentDetails, ClaimStatus, Beneficiary} = require('./models')
+const {User, Reservations, RoomService, Insurable, Houndify, Wifi, WifiAdvanced, Appointments, Sessions, Onboarding, PaymentDetails, ClaimStatus, Beneficiary} = require('./models')
 const optum = require('./optum.json')
 
 
@@ -101,6 +101,24 @@ app.get('/houndifyMCP', async (req, res) => {
     try {
         const houndify = await Houndify.find({});
         res.status(200).json({results: houndify, error: null});
+    } catch(err) {
+        res.status(400).json(err);
+    }
+})
+
+app.get('/reservations', async (req, res) => {
+    try {
+        const reservations = await Reservations.find({});
+        res.status(200).json({results: reservations, error: null});
+    } catch(err) {
+        res.status(400).json(err);
+    }
+})
+
+app.get('/room_service', async (req, res) => {
+    try {
+        const room_service = await RoomService.find({});
+        res.status(200).json({results: room_service, error: null});
     } catch(err) {
         res.status(400).json(err);
     }
@@ -230,6 +248,28 @@ app.post('/wifi-access', async (req, res) => {
         const newWifi = await Wifi.create(req.body);
         console.log(newWifi);
         res.status(200).json({result: 'The post to your database was successful', error: null})
+    } catch(err) {
+        res.status(400).json({result: err});
+    }
+})
+
+app.post('/reservations', async (req, res) => {
+    try {
+        console.log(req.body);
+        const newReservation = await Reservations.create(req.body);
+        console.log(newReservation);
+        res.status(201).json({result: 'The post to your database was successful', error: null})
+    } catch(err) {
+        res.status(400).json({result: err});
+    }
+})
+
+app.post('/room_service', async (req, res) => {
+    try {
+        console.log(req.body);
+        const newRoomService = await RoomService.create(req.body);
+        console.log(newRoomService);
+        res.status(201).json({result: 'The post to your database was successful', error: null})
     } catch(err) {
         res.status(400).json({result: err});
     }

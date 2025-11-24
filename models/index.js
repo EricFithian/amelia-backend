@@ -9,6 +9,8 @@ const ClaimStatus = require('./ClaimStatus')
 const Insurable = require('./Insurable')
 const PaymentDetails = require('./PaymentDetails')
 const Houndify = require('./HoundifyMCP')
+const Reservations = require('./Reservations')
+const RoomService = require('./RoomService')
 
 module.exports = {
     User,
@@ -20,5 +22,7 @@ module.exports = {
     ClaimStatus,
     PaymentDetails,
     Insurable,
-    Houndify
+    Houndify,
+    Reservations,
+    RoomService
 }
