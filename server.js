@@ -359,22 +359,10 @@ app.put('/payment_details/:email', async (req, res) => {
     }
 })
 
-app.put('/reservation/:email', async (req, res) => {
+app.put('/reservation/:id', async (req, res) => {
     try {
-        let reservationUpdate = await Reservations.find({"guest.email": req.params.email});
-        if(req.body.paymentFrequency && req.body.paymentType) {
-            paymentUpdate.paymentFrequency = req.body.paymentFrequency
-            paymentUpdate.paymentType = req.body.paymentType
-        } else if(req.body.paymentFrequency) {
-            paymentUpdate.paymentFrequency = req.body.paymentFrequency
-        } else if(req.body.paymentType) {
-            paymentUpdate.paymentType = req.body.paymentType
-        } else {
-            return res.json({error: `I did not receive any paymentType or paymentFrequency in the request`})
-        }
-        updatedUser = await User.findByIdAndUpdate(paymentUpdate._id, paymentUpdate)
-        console.log(updatedUser);
-        res.status(200).json({result: 'The post to your database was successful', error: null})
+        let reservationUpdate = await Reservations.findByIdAndUpdate(req.params.id, req.body)
+        res.status(201).json({result: 'The post to your database was successful', error: null})
     } catch(err) {
         res.status(400).json({result: err});
     }
