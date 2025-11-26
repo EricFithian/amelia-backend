@@ -7,7 +7,11 @@ const GuestSchema = new mongoose.Schema({
     first_name: String,
     last_name: String,
     address: String,
-    phone_number: String
+    phone_number: String,
+    email: {
+        type: String,
+        default: "mhowey@soundhound.com"
+    }
 })
 
 const ReservationStatusSchema = new mongoose.Schema({
@@ -20,7 +24,19 @@ const ReservationStatusSchema = new mongoose.Schema({
   guest: GuestSchema,
   rooms: [String],
   total_amount: Number,
-  currency: String
+  currency: String,
+  status: {
+    type: String,
+    default: "Booked"
+  },
+  check_in: {
+    type: String,
+    default: "2025-11-26"
+  },
+  check_out: {
+    type: String,
+    default: "2025-11-26"
+  }
 },{timestamps: true});
 
 const ReservationStatus = mongoose.model("Reservation", ReservationStatusSchema);
