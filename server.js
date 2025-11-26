@@ -370,7 +370,16 @@ app.put('/payment_details/:email', async (req, res) => {
 
 app.put('/reservations/:id', async (req, res) => {
     try {
-        let reservationUpdate = await Reservations.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        let reservationUpdate = await Reservations.findById(req.params.id)
+        if(req.body.status) {reservationUpdate.status = req.body.status}
+        if(req.body.check_in) {reservationUpdate.check_in = req.body.check_in}
+        if(req.body.check_out) {reservationUpdate.check_out = req.body.check_out}
+        if(req.body.currency) {reservationUpdate.currency = req.body.currency}
+        if(req.body.total) {reservationUpdate.total = req.body.total}
+        if(req.body.hotel_id) {reservationUpdate.hotel_id = req.body.hotel_id}
+        if(req.body.hotel_name) {reservationUpdate.hotel_name = req.body.hotel_name}
+        if(req.body.guest) {reservationUpdate.guest = req.body.guest}
+        if(req.body.rooms) {reservationUpdate.rooms = req.body.rooms}
         res.status(201).json({result: 'The post to your database was successful', error: null})
     } catch(err) {
         res.status(400).json({result: err});
