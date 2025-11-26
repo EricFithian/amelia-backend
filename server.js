@@ -178,6 +178,15 @@ app.get('/reservations/:email', async (req, res) => {
     }
 })
 
+app.get('/room_service/:guest', async (req, res) => {
+    try {
+        let room_service = await RoomService.find({"guest": req.params.guest});
+        res.status(200).json(room_service);
+    } catch(err) {
+        res.status(400).json(err);
+    }
+})
+
 app.post("/login", async function (req, res) {
     try {
         const foundUser = await User.findOne({ email: req.body.email });
@@ -367,22 +376,11 @@ app.put('/reservations/:id', async (req, res) => {
         res.status(400).json({result: err});
     }
 })
-app.put('/payment_details/:email', async (req, res) => {
+
+app.put('/room_service/:id', async (req, res) => {
     try {
-        let paymentUpdate = await PaymentDetails.findOne({accountEmail: req.params.email});
-        if(req.body.paymentFrequency && req.body.paymentType) {
-            paymentUpdate.paymentFrequency = req.body.paymentFrequency
-            paymentUpdate.paymentType = req.body.paymentType
-        } else if(req.body.paymentFrequency) {
-            paymentUpdate.paymentFrequency = req.body.paymentFrequency
-        } else if(req.body.paymentType) {
-            paymentUpdate.paymentType = req.body.paymentType
-        } else {
-            return res.json({error: `I did not receive any paymentType or paymentFrequency in the request`})
-        }
-        updatedUser = await User.findByIdAndUpdate(paymentUpdate._id, paymentUpdate)
-        console.log(updatedUser);
-        res.status(200).json({result: 'The post to your database was successful', error: null})
+        let roomServiceUpdate = await RoomService.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        res.status(201).json({result: 'The post to your database was successful', error: null})
     } catch(err) {
         res.status(400).json({result: err});
     }
@@ -481,6 +479,15 @@ app.get('/reset', async(req, res) => {
         await User.deleteMany({});
         await Wifi.deleteMany({});
         await Onboarding.deleteMany({});
+        res.redirect('/');
+    } catch(err) {
+        res.status(403).json({result: err})
+    }
+})
+app.get('/reset_deloitte', async(req, res) => {
+    try {
+        await RoomService.deleteMany({});
+        await Reservations.deleteMany({});
         res.redirect('/');
     } catch(err) {
         res.status(403).json({result: err})
