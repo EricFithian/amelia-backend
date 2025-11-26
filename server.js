@@ -488,7 +488,7 @@ app.get('/reset_deloitte', async(req, res) => {
     try {
         await RoomService.deleteMany({});
         await Reservations.deleteMany({});
-        res.redirect('/');
+        res.redirect('/reservations');
     } catch(err) {
         res.status(403).json({result: err})
     }
