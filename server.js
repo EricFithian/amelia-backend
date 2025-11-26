@@ -289,7 +289,7 @@ app.post('/room_service', async (req, res) => {
         console.log(newRoomService);
         res.status(201).json({result: 'The post to your database was successful', error: null})
     } catch(err) {
-        res.status(400).json({result: err});
+        res.status(400).json({result: req.body});
     }
 })
 
