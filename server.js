@@ -380,6 +380,7 @@ app.put('/reservations/:id', async (req, res) => {
         if(req.body.hotel_name) {reservationUpdate.hotel_name = req.body.hotel_name}
         if(req.body.guest) {reservationUpdate.guest = req.body.guest}
         if(req.body.rooms) {reservationUpdate.rooms = req.body.rooms}
+        await Reservations.findByIdAndUpdate(reservationUpdate._id, reservationUpdate)
         res.status(201).json({result: 'The post to your database was successful', error: null})
     } catch(err) {
         res.status(400).json({result: err});
