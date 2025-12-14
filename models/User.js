@@ -4,10 +4,10 @@ const mongoose = require("mongoose");
 // MODELS
 ////////////////////////////////
 
-const claimsSchema = new mongoose.Schema({
-  claimNumber: Number,
-  description: String,
-  status: String
+const houseSchema = new mongoose.Schema({
+  address: String,
+  policyNumber: Number,
+  effectiveDate: String
 })
 
 const UserSchema = new mongoose.Schema({
@@ -27,7 +27,7 @@ const UserSchema = new mongoose.Schema({
   }, phoneNumber: {
     type: String,
     default: "123-867-5309"
-  }, claims: [claimsSchema]
+  }, homes: [houseSchema]
 },{timestamps: true});
 
 const User = mongoose.model("User", UserSchema);
