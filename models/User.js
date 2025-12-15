@@ -6,8 +6,7 @@ const mongoose = require("mongoose");
 
 const houseSchema = new mongoose.Schema({
   address: String,
-  policyNumber: Number,
-  effectiveDate: String
+  policyNumber: Number
 })
 
 const UserSchema = new mongoose.Schema({
