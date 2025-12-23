@@ -8,6 +8,7 @@ let AppointmentScheduleSchema = new mongoose.Schema({
     patientName: String,
     patientDOB: String,
     phoneNumber: String,
+    department: String,
     doctor: String,
     date1: String,
     time1: String,
