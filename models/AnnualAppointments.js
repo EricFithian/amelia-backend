@@ -5,20 +5,20 @@ const mongoose = require("mongoose");
 ////////////////////////////////
 
 let AnnualAppointmentsSchema = new mongoose.Schema({
-  patientFirstName: String,
-  patientLastName: String,
-  patientDOB: String,
-  phoneNumber: String,
-  examType: String,
-  doctor: String,
-  lastExamDate: String,
-  nextExamDue: String,
-  date1: String,
-  time1: String,
-  date2: String,
-  time2: String,
-  date3: String,
-  time3: String
+  patientFirstName: {type: String, default: ""},
+  patientLastName: {type: String, default: ""},
+  patientDOB: {type: String, default: ""},
+  phoneNumber: {type: String, default: ""},
+  examType: {type: String, default: ""},
+  doctor: {type: String, default: ""},
+  lastExamDate: {type: String, default: ""},
+  nextExamDue: {type: String, default: ""},
+  date1: {type: String, default: ""},
+  time1: {type: String, default: ""},
+  date2: {type: String, default: ""},
+  time2: {type: String, default: ""},
+  date3: {type: String, default: ""},
+  time3: {type: String, default: ""}
 },{timestamps: true});
 
 const AnnualAppointments = mongoose.model("AnnualAppointments", AnnualAppointmentsSchema);
