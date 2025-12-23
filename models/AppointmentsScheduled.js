@@ -12,6 +12,7 @@ let AppointmentScheduleSchema = new mongoose.Schema({
     doctor: String,
     date1: String,
     time1: String,
+    location: String,
     date2: String,
     time2: String,
     date3: String,
