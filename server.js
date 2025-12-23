@@ -178,7 +178,7 @@ app.get('/appointments_scheduled/:patientName', async (req, res) => {
 })
 app.get('/annual_appointments/:firstName/:lastName', async (req, res) => {
     try {
-        const users_claim_status = await ClaimStatus.findOne({petitionerEmail: req.params.email});
+        const users_claim_status = await AnnualAppointments.findOne({petitionerEmail: req.params.email});
         res.status(200).json({claim_status: users_claim_status, error: null});
     } catch(err) {
         res.status(400).json(err);
@@ -307,9 +307,7 @@ app.post('/wifi-access', async (req, res) => {
 
 app.post('/appointments_scheduled', async (req, res) => {
     try {
-        console.log(req.body);
-        const newAppointment = await AppointmentsScheduled.create(req.body);
-        console.log(newAppointment);
+        await AppointmentsScheduled.create(req.body);
         res.status(201).json({result: 'The post to your database was successful', error: null})
     } catch(err) {
         res.status(400).json({result: err});
