@@ -15,9 +15,9 @@ const { PORT = 4321, MONGODB_URI } = process.env;
 ///////////////////////////////
 // MIDDLEWARE
 ////////////////////////////////
-app.use(bodyParser.json({limit: '200mb', extended: true}));
-app.use(bodyParser.urlencoded({limit: "200mb", extended: true, parameterLimit:50000}));
-app.use(bodyParser.text({ limit: '200mb' }));
+app.use(bodyParser.json({limit: '50mb', extended: true}));
+app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:500000}));
+app.use(bodyParser.text({ limit: '50mb' }));
 app.use(express.json()); // parse json bodies - this will run before our request accesses the people router
 app.use(cors()); // to prevent cors errors, open access to all origins
 app.use(morgan("dev")); // logging for development
