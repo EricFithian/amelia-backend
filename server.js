@@ -294,7 +294,7 @@ app.post('/appointments_scheduled', async (req, res) => {
         console.log(req.body);
         const newAppointment = await AppointmentsScheduled.create(req.body);
         console.log(newAppointment);
-        res.status(200).json({result: 'The post to your database was successful', error: null})
+        res.status(201).json({result: 'The post to your database was successful', error: null})
     } catch(err) {
         res.status(400).json({result: err});
     }
@@ -305,7 +305,7 @@ app.post('/annual_appointments', async (req, res) => {
         console.log(req.body);
         const newAppointment = await AnnualAppointments.create(req.body);
         console.log(newAppointment);
-        res.status(200).json({result: 'The post to your database was successful', error: null})
+        res.status(201).json({result: 'The post to your database was successful', error: null})
     } catch(err) {
         res.status(400).json({result: err});
     }
