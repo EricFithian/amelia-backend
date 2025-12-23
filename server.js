@@ -310,7 +310,7 @@ app.post('/appointments_scheduled', async (req, res) => {
         console.log(req.body);
         const newAppointment = await AppointmentsScheduled.create(req.body);
         console.log(newAppointment);
-        res.status(200).json({result: newAppointment, error: null})
+        res.status(200).json({result: "The post was successful", error: null})
     } catch(err) {
         res.status(400).json({result: err});
     }
