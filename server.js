@@ -39,7 +39,7 @@ app.use(
 
 // console.log(session);
 // console.log(MongoStore);
-const {User, Reservations, RoomService, Insurable, Houndify, Wifi, WifiAdvanced, Appointments, Sessions, Onboarding, PaymentDetails, ClaimStatus, Beneficiary} = require('./models')
+const {User, Reservations, RoomService, Insurable, Houndify, Wifi, WifiAdvanced, Appointments, Sessions, Onboarding, PaymentDetails, ClaimStatus, Beneficiary, AppointmentsScheduled, AnnualAppointments} = require('./models')
 const optum = require('./optum.json')
 
 
@@ -118,6 +118,24 @@ app.get('/reservations', async (req, res) => {
 app.get('/room_service', async (req, res) => {
     try {
         const room_service = await RoomService.find({});
+        res.status(200).json({results: room_service, error: null});
+    } catch(err) {
+        res.status(400).json(err);
+    }
+})
+
+app.get('/appointments_scheduled', async (req, res) => {
+    try {
+        const room_service = await AppointmentsScheduled.find({});
+        res.status(200).json({results: room_service, error: null});
+    } catch(err) {
+        res.status(400).json(err);
+    }
+})
+
+app.get('/annual_appointments', async (req, res) => {
+    try {
+        const room_service = await AnnualAppointments.find({});
         res.status(200).json({results: room_service, error: null});
     } catch(err) {
         res.status(400).json(err);
@@ -265,6 +283,28 @@ app.post('/wifi-access', async (req, res) => {
         console.log(req.body);
         const newWifi = await Wifi.create(req.body);
         console.log(newWifi);
+        res.status(200).json({result: 'The post to your database was successful', error: null})
+    } catch(err) {
+        res.status(400).json({result: err});
+    }
+})
+
+app.post('/appointments_scheduled', async (req, res) => {
+    try {
+        console.log(req.body);
+        const newAppointment = await AppointmentsScheduled.create(req.body);
+        console.log(newAppointment);
+        res.status(200).json({result: 'The post to your database was successful', error: null})
+    } catch(err) {
+        res.status(400).json({result: err});
+    }
+})
+
+app.post('/annual_appointments', async (req, res) => {
+    try {
+        console.log(req.body);
+        const newAppointment = await AnnualAppointments.create(req.body);
+        console.log(newAppointment);
         res.status(200).json({result: 'The post to your database was successful', error: null})
     } catch(err) {
         res.status(400).json({result: err});

@@ -11,6 +11,8 @@ const PaymentDetails = require('./PaymentDetails')
 const Houndify = require('./HoundifyMCP')
 const Reservations = require('./Reservations')
 const RoomService = require('./RoomService')
+const AnnualAppointments = require('./AnnualAppointments')
+const AppointmentsScheduled = require('./AppointmentsScheduled')
 
 module.exports = {
     User,
@@ -24,5 +26,7 @@ module.exports = {
     Insurable,
     Houndify,
     Reservations,
-    RoomService
+    RoomService,
+    AppointmentsScheduled,
+    AnnualAppointments
 }
