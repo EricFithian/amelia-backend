@@ -659,6 +659,16 @@ app.delete('/appointments/:patient/:time', async(req, res) => {
     }
 })
 
+app.delete('/appointments_scheduled/:patient/:date1/:time1', async(req, res) => {
+    try {
+        toBeUpdated = await AppointmentsScheduled.findOneAndDelete({patientName: req.params.patient, date1: req.params.date1, time1: req.params.time1});
+        res.status(200).json({result: `Updated the appointment for ${req.params.patient}`});
+    } catch(err) {
+        console.log(err);
+        res.status(403).json({result: res.redirect(`/${req.body.email}`)});
+    }
+})
+
 app.get('/:email', async (req, res) => {
     try {
         let currentUser
