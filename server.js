@@ -170,16 +170,16 @@ app.get('/claim_status/:email', async (req, res) => {
 })
 app.get('/appointments_scheduled/:patientName', async (req, res) => {
     try {
-        const patient_appointments = await AppointmentsScheduled.findOne({appointments: req.params.patientName});
-        res.status(200).json({claim_status: patient_appointments, error: null});
+        const patient_appointments = await AppointmentsScheduled.find({appointments: req.params.patientName});
+        res.status(200).json({appointments: patient_appointments, error: null});
     } catch(err) {
         res.status(400).json(err);
     }
 })
 app.get('/annual_appointments/:firstName/:lastName', async (req, res) => {
     try {
-        const users_claim_status = await AnnualAppointments.findOne({petitionerEmail: req.params.email});
-        res.status(200).json({claim_status: users_claim_status, error: null});
+        const users_claim_status = await AnnualAppointments.find({petitionerEmail: req.params.email});
+        res.status(200).json({annual_appointments: users_claim_status, error: null});
     } catch(err) {
         res.status(400).json(err);
     }
@@ -316,16 +316,16 @@ app.post('/appointments_scheduled', async (req, res) => {
     }
 })
 
-// app.post('/annual_appointments', async (req, res) => {
-//     try {
-//         console.log(req.body);
-//         const newAppointment = await AnnualAppointments.create(req.body);
-//         console.log(newAppointment);
-//         res.status(200).json({result: 'The post to your database was successful', error: null})
-//     } catch(err) {
-//         res.status(400).json({result: err});
-//     }
-// })
+app.post('/annual_appointments', async (req, res) => {
+    try {
+        console.log(req.body);
+        const newAppointment = await AnnualAppointments.create(req.body);
+        console.log(newAppointment);
+        res.status(200).json({result: 'The post to your database was successful', error: null})
+    } catch(err) {
+        res.status(400).json({result: err});
+    }
+})
 
 app.post('/reservations', async (req, res) => {
     try {
