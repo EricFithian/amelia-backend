@@ -4,11 +4,6 @@ const mongoose = require("mongoose");
 // MODELS
 ////////////////////////////////
 
-const accountSchema = new mongoose.Schema({
-  pastDue: String,
-  disconnected: String
-})
-
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -25,7 +20,8 @@ const UserSchema = new mongoose.Schema({
   }, phoneNumber: {
     type: String,
     default: "123-867-5309"
-  }, account: accountSchema
+  }, pastDue: String,
+  disconnected: String
 },{timestamps: true});
 
 const User = mongoose.model("User", UserSchema);
