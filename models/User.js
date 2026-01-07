@@ -25,7 +25,7 @@ const UserSchema = new mongoose.Schema({
   }, phoneNumber: {
     type: String,
     default: "123-867-5309"
-  }, account: [accountSchema]
+  }, account: accountSchema
 },{timestamps: true});
 
 const User = mongoose.model("User", UserSchema);
