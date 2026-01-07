@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 
 const accountSchema = new mongoose.Schema({
   pastDue: String,
-  disconnectedForNonpayment: String
+  disconnected: String
 })
 
 const UserSchema = new mongoose.Schema({
