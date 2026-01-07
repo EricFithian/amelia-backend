@@ -4,9 +4,9 @@ const mongoose = require("mongoose");
 // MODELS
 ////////////////////////////////
 
-const houseSchema = new mongoose.Schema({
-  address: String,
-  policyNumber: Number
+const accountSchema = new mongoose.Schema({
+  pastDue: Boolean,
+  disconnectedForNonpayment: Boolean
 })
 
 const UserSchema = new mongoose.Schema({
@@ -26,7 +26,7 @@ const UserSchema = new mongoose.Schema({
   }, phoneNumber: {
     type: String,
     default: "123-867-5309"
-  }, homes: [houseSchema]
+  }, homes: [accountSchema]
 },{timestamps: true});
 
 const User = mongoose.model("User", UserSchema);
