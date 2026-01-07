@@ -283,10 +283,7 @@ app.get('/frontend', async (req, res) => {
 
 app.post('/', async (req, res) => {
     try {
-        newUser = req.body
-        console.log(newUser);
-        const addUser = await User.create(newUser);
-        console.log(addUser);
+        const addUser = await User.create(req.body);
         res.status(200).json({result: 'The update to your database was successful'})
     } catch(err) {
         console.log(err);
