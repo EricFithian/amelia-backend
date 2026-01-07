@@ -20,8 +20,8 @@ const UserSchema = new mongoose.Schema({
   }, phoneNumber: {
     type: String,
     default: "123-867-5309"
-  }, pastDue: String,
-  disconnected: String
+  }, pastDue: {type: String, default: "true"},
+  disconnected: {type: String, default: "true"}
 },{timestamps: true});
 
 const User = mongoose.model("User", UserSchema);
