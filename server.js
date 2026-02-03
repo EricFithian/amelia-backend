@@ -304,7 +304,7 @@ app.post('/wifi-access', async (req, res) => {
 app.get('/wildfire', async (req, res) => {
     try {
         console.log(req.body);
-        const allWildfire = await Wildfire.find();
+        const allWildfire = await Wildfire.find({});
         console.log(allWildfire);
         res.status(200).json(allWildfire)
     } catch(err) {
