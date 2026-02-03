@@ -301,6 +301,16 @@ app.post('/wifi-access', async (req, res) => {
         res.status(400).json({result: err});
     }
 })
+app.get('/wildfire', async (req, res) => {
+    try {
+        console.log(req.body);
+        const allWildfire = await Wildfire.find();
+        console.log(allWildfire);
+        res.status(200).json({result: 'The post to your database was successful', error: null})
+    } catch(err) {
+        res.status(400).json({result: err});
+    }
+})
 
 app.post('/wildfire', async (req, res) => {
     try {
