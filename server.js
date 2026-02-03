@@ -39,7 +39,7 @@ app.use(
 
 // console.log(session);
 // console.log(MongoStore);
-const {User, Reservations, RoomService, Insurable, Houndify, Wifi, WifiAdvanced, Appointments, Sessions, Onboarding, PaymentDetails, ClaimStatus, Beneficiary, AppointmentsScheduled, AnnualAppointments} = require('./models')
+const {User, Wildfire, Reservations, RoomService, Insurable, Houndify, Wifi, WifiAdvanced, Appointments, Sessions, Onboarding, PaymentDetails, ClaimStatus, Beneficiary, AppointmentsScheduled, AnnualAppointments} = require('./models')
 const optum = require('./optum.json')
 
 
@@ -296,6 +296,17 @@ app.post('/wifi-access', async (req, res) => {
         console.log(req.body);
         const newWifi = await Wifi.create(req.body);
         console.log(newWifi);
+        res.status(200).json({result: 'The post to your database was successful', error: null})
+    } catch(err) {
+        res.status(400).json({result: err});
+    }
+})
+
+app.post('/wildfire', async (req, res) => {
+    try {
+        console.log(req.body);
+        const newWildfire = await Wildfire.create(req.body);
+        console.log(newWildfire);
         res.status(200).json({result: 'The post to your database was successful', error: null})
     } catch(err) {
         res.status(400).json({result: err});
