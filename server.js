@@ -306,7 +306,7 @@ app.get('/wildfire', async (req, res) => {
         console.log(req.body);
         const allWildfire = await Wildfire.find();
         console.log(allWildfire);
-        res.status(200).json({result: 'The post to your database was successful', error: null})
+        res.status(200).json(allWildfire)
     } catch(err) {
         res.status(400).json({result: err});
     }
