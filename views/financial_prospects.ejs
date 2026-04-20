@@ -46,8 +46,9 @@
 <aside class="sidebar">
     <div class="sidebar-header">
         <a href="/reports" class="back-link">← Pipeline</a>
-        <h2><%= prospect.name %></h2>
-        <div class="company-tag"><%= prospect.firstName %> <%= prospect.lastName %></div>
+        <h2><%= prospect.firstName %> <%= prospect.lastName %></h2>
+        <h2><%= prospect.email %></h2>
+        <div class="company-tag"><%= prospect.status %></div>
     </div>
 
     <div class="sidebar-scroll">
@@ -61,7 +62,6 @@
         <div style="font-size: 0.875rem; color: var(--text-muted);">
             <div style="margin-bottom: 8px;"><b>Source:</b> Internal Upload</div>
             <div><b>Reference:</b> <%= prospect._id %></div>
-            <div><b>Status:</b> <%= prospect.status %></div>
         </div>
     </div>
 </aside>
