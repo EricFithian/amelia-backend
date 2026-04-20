@@ -2,42 +2,99 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Viewing: <%= title %></title>
+    <title>Financial Report | <%= prospect.lastName %></title>
     <style>
-        body { font-family: sans-serif; padding: 20px; background: #f4f4f4; }
-        .container { max-width: 900px; margin: auto; background: white; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        iframe { border: 1px solid #ddd; margin-top: 15px; }
+        :root {
+            --navy: #0a192f;
+            --gold: #c5a059;
+            --light-grey: #f8f9fa;
+            --border: #e0e0e0;
+        }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; background-color: var(--light-grey); color: #333; }
+        
+        /* Header Styling */
+        header { 
+            background: var(--navy); color: white; padding: 1rem 2rem; 
+            display: flex; justify-content: space-between; align-items: center;
+        }
+
+        .main-layout { display: flex; height: calc(100vh - 70px); }
+
+        /* Sidebar Info */
+        .prospect-info { 
+            width: 350px; background: white; border-right: 1px solid var(--border); 
+            padding: 2rem; overflow-y: auto; 
+        }
+        
+        .status-badge {
+            padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold;
+            text-transform: uppercase; display: inline-block;
+            background: #e3f2fd; color: #1976d2; /* Default 'In Progress' */
+        }
+        .status-prospect { background: #fff3e0; color: #ef6c00; }
+
+        /* PDF Viewer Area */
+        .viewer-area { flex-grow: 1; padding: 1.5rem; display: flex; flex-direction: column; }
+        .pdf-container { background: #525659; flex-grow: 1; border-radius: 4px; box-shadow: inset 0 0 10px rgba(0,0,0,0.5); }
+        iframe { border: none; width: 100%; height: 100%; border-radius: 4px; }
+
+        .data-label { font-size: 0.75rem; color: #777; margin-top: 1.5rem; text-transform: uppercase; letter-spacing: 1px; }
+        .data-value { font-size: 1.1rem; font-weight: 500; margin: 0.2rem 0; }
+        .notes-box { font-style: italic; color: #555; background: #f9f9f9; padding: 10px; border-left: 3px solid var(--gold); }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1><%= title %>'s Portfolio</h1>
-        <p>Status: <span id="status">Processing...</span></p>
+<header>
+    <div style="font-weight: bold; font-size: 1.2rem;">FINANCIAL CORE <span style="color: var(--gold);">| Report Portal</span></div>
+    <div>System Date: <%= new Date().toLocaleDateString() %></div>
+</header>
 
-        <iframe id="pdf-frame" width="100%" height="700px"></iframe>
-    </div>
+<div class="main-layout">
+    <aside class="prospect-info">
+        <div class="status-badge <%= prospect.status === 'prospect' ? 'status-prospect' : '' %>">
+            <%= prospect.status %>
+        </div>
 
-    <script>
-        // Use EJS to inject the string into a JS variable
-        // We wrap it in quotes so it becomes a valid JS string
-        const base64String = "<%- pdfData %>";
-        const frame = document.getElementById('pdf-frame');
-        const status = document.getElementById('status');
+        <div class="data-label">Account Holder</div>
+        <div class="data-value"><%= prospect.firstName %> <%= prospect.lastName %></div>
 
-        if (base64String && base64String.length > 0) {
-            // Check if the string already has the prefix, if not, add it
-            const prefix = "data:application/pdf;base64,";
-            frame.src = base64String.startsWith("data:") ? base64String : prefix + base64String;
-            
-            status.innerText = "Rendered Successfully";
-            status.style.color = "green";
-        } else {
-            status.innerText = "Error: PDF data is empty or corrupt.";
-            status.style.color = "red";
-        }
-    </script>
+        <div class="data-label">Email Address</div>
+        <div class="data-value"><%= prospect.email %></div>
+
+        <div class="data-label">Reference ID</div>
+        <div class="data-value" style="font-family: monospace;"><%= prospect._id %></div>
+
+        <div class="data-label">Notes/Internal Comments</div>
+        <p class="notes-box">"<%= prospect.notes || 'No internal notes provided.' %>"</p>
+        
+        <hr style="margin-top: 2rem; border: 0; border-top: 1px solid var(--border);">
+        <button onclick="window.print()" style="width: 100%; padding: 10px; cursor: pointer; background: var(--navy); color: white; border: none; border-radius: 4px;">
+            Export View
+        </button>
+    </aside>
+
+    <main class="viewer-area">
+        <div style="margin-bottom: 10px; font-weight: bold; color: var(--navy);">ENCRYPTED DOCUMENT VIEW:</div>
+        <div class="pdf-container">
+            <iframe id="pdf-viewer" src="about:blank"></iframe>
+        </div>
+    </main>
+</div>
+
+<script>
+    // Injected Base64 from MongoDB
+    const rawData = "<%- prospect.base64File %>";
+    const iframe = document.getElementById('pdf-viewer');
+
+    if (rawData) {
+        // Ensure prefix exists
+        const prefix = "data:application/pdf;base64,";
+        iframe.src = rawData.startsWith("data:") ? rawData : prefix + rawData;
+    } else {
+        iframe.contentDocument.body.innerHTML = "<h2 style='color:white; text-align:center; margin-top:20%;'>Document not found.</h2>";
+    }
+</script>
 
 </body>
 </html>

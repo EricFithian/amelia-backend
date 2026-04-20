@@ -271,7 +271,8 @@ app.get('/frontend', async (req, res) => {
     }
 })
 
-app.get('/prospects/:id', async (req, res) => {
+// financial prospects
+app.get('/reports/:id', async (req, res) => {
     try {
         const prospect = await FinancialProspects.findById(req.params.id);
         
@@ -280,10 +281,7 @@ app.get('/prospects/:id', async (req, res) => {
         }
 
         // Pass the prospect object to the EJS template
-        res.render('financial_prospects', { 
-            title: prospect.firstName, 
-            pdfData: prospect.base64File 
-        });
+        res.render('financial_prospects', { prospect });
     } catch (err) {
         res.status(500).send("Error fetching prospect");
     }
