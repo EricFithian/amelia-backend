@@ -20,7 +20,7 @@ const FinancialProspectsSchema = new mongoose.Schema({
   notes: {
     type: String
   },
-  pdfBase64: {
+  base64File: {
     type: String
   }
 },{timestamps: true});
