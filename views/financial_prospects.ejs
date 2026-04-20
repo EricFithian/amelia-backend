@@ -2,99 +2,97 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Financial Report | <%= prospect.lastName %></title>
+    <title><%= prospect.firstName %> - Report Viewer</title>
     <style>
-        :root {
-            --navy: #0a192f;
-            --gold: #c5a059;
-            --light-grey: #f8f9fa;
-            --border: #e0e0e0;
-        }
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; background-color: var(--light-grey); color: #333; }
+        body { font-family: 'Inter', sans-serif; margin: 0; display: flex; height: 100vh; background: #f1f5f9; }
         
-        /* Header Styling */
-        header { 
-            background: var(--navy); color: white; padding: 1rem 2rem; 
-            display: flex; justify-content: space-between; align-items: center;
+        /* Sidebar Navigation & Data */
+        .sidebar { 
+            width: 400px; 
+            background: white; 
+            border-right: 1px solid #e2e8f0; 
+            display: flex; 
+            flex-direction: column;
+            box-shadow: 4px 0 10px rgba(0,0,0,0.02);
         }
 
-        .main-layout { display: flex; height: calc(100vh - 70px); }
+        .sidebar-header { padding: 24px; border-bottom: 1px solid #f1f5f9; }
+        .back-nav { color: #2563eb; text-decoration: none; font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 15px; }
+        
+        .sidebar-content { padding: 24px; overflow-y: auto; flex-grow: 1; }
+        
+        h2 { margin: 0; font-size: 1.4rem; color: #0f172a; }
+        .label { font-size: 0.75rem; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 20px; display: block; }
+        .value { font-size: 1rem; color: #334155; margin: 4px 0 16px 0; }
 
-        /* Sidebar Info */
-        .prospect-info { 
-            width: 350px; background: white; border-right: 1px solid var(--border); 
-            padding: 2rem; overflow-y: auto; 
+        .ai-box { 
+            background: #f8fafc; 
+            border: 1px solid #e2e8f0; 
+            border-radius: 8px; 
+            padding: 16px; 
+            font-size: 0.9rem; 
+            line-height: 1.6; 
+            color: #475569;
         }
         
-        .status-badge {
-            padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold;
-            text-transform: uppercase; display: inline-block;
-            background: #e3f2fd; color: #1976d2; /* Default 'In Progress' */
+        /* PDF Viewer Container */
+        .viewer-container { flex-grow: 1; position: relative; background: #334155; }
+        iframe { width: 100%; height: 100%; border: none; }
+        
+        .loader-overlay {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            color: white; font-weight: 500; pointer-events: none;
         }
-        .status-prospect { background: #fff3e0; color: #ef6c00; }
-
-        /* PDF Viewer Area */
-        .viewer-area { flex-grow: 1; padding: 1.5rem; display: flex; flex-direction: column; }
-        .pdf-container { background: #525659; flex-grow: 1; border-radius: 4px; box-shadow: inset 0 0 10px rgba(0,0,0,0.5); }
-        iframe { border: none; width: 100%; height: 100%; border-radius: 4px; }
-
-        .data-label { font-size: 0.75rem; color: #777; margin-top: 1.5rem; text-transform: uppercase; letter-spacing: 1px; }
-        .data-value { font-size: 1.1rem; font-weight: 500; margin: 0.2rem 0; }
-        .notes-box { font-style: italic; color: #555; background: #f9f9f9; padding: 10px; border-left: 3px solid var(--gold); }
     </style>
 </head>
 <body>
 
-<header>
-    <div style="font-weight: bold; font-size: 1.2rem;">FINANCIAL CORE <span style="color: var(--gold);">| Report Portal</span></div>
-    <div>System Date: <%= new Date().toLocaleDateString() %></div>
-</header>
-
-<div class="main-layout">
-    <aside class="prospect-info">
-        <div class="status-badge <%= prospect.status === 'prospect' ? 'status-prospect' : '' %>">
-            <%= prospect.status %>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <a href="/reports" class="back-nav">← Pipeline View</a>
+            <h2><%= prospect.firstName %> <%= prospect.lastName %></h2>
         </div>
-
-        <div class="data-label">Account Holder</div>
-        <div class="data-value"><%= prospect.firstName %> <%= prospect.lastName %></div>
-
-        <div class="data-label">Email Address</div>
-        <div class="data-value"><%= prospect.email %></div>
-
-        <div class="data-label">Reference ID</div>
-        <div class="data-value" style="font-family: monospace;"><%= prospect._id %></div>
-
-        <div class="data-label">Notes/Internal Comments</div>
-        <p class="notes-box">"<%= prospect.notes || 'No internal notes provided.' %>"</p>
         
-        <hr style="margin-top: 2rem; border: 0; border-top: 1px solid var(--border);">
-        <button onclick="window.print()" style="width: 100%; padding: 10px; cursor: pointer; background: var(--navy); color: white; border: none; border-radius: 4px;">
-            Export View
-        </button>
-    </aside>
+        <div class="sidebar-content">
+            <span class="label">Email</span>
+            <div class="value"><%= prospect.email %></div>
 
-    <main class="viewer-area">
-        <div style="margin-bottom: 10px; font-weight: bold; color: var(--navy);">ENCRYPTED DOCUMENT VIEW:</div>
-        <div class="pdf-container">
-            <iframe id="pdf-viewer" src="about:blank"></iframe>
+            <span class="label">Interpretation / AI Summary</span>
+            <div class="ai-box">
+                <%= prospect.notes || "Analysis pending for this document..." %>
+            </div>
+
+            <span class="label">System Details</span>
+            <div class="value" style="font-size: 0.8rem;">
+                Object ID: <%= prospect._id %><br>
+                File Status: Base64 Encoded
+            </div>
         </div>
-    </main>
-</div>
+    </div>
 
-<script>
-    // Injected Base64 from MongoDB
-    const rawData = "<%- prospect.base64File %>";
-    const iframe = document.getElementById('pdf-viewer');
+    <div class="viewer-container">
+        <div id="loader" class="loader-overlay">Loading Document...</div>
+        <iframe id="pdf-frame"></iframe>
+    </div>
 
-    if (rawData) {
-        // Ensure prefix exists
-        const prefix = "data:application/pdf;base64,";
-        iframe.src = rawData.startsWith("data:") ? rawData : prefix + rawData;
-    } else {
-        iframe.contentDocument.body.innerHTML = "<h2 style='color:white; text-align:center; margin-top:20%;'>Document not found.</h2>";
-    }
-</script>
+    <script>
+        // Use EJS to grab the property 'base64File'
+        const rawData = "<%- prospect.base64File %>";
+        const frame = document.getElementById('pdf-frame');
+        const loader = document.getElementById('loader');
 
+        if (rawData && rawData.length > 50) {
+            // Logic to ensure the Data URI prefix is present
+            const prefix = "data:application/pdf;base64,";
+            frame.src = rawData.startsWith("data:") ? rawData : prefix + rawData;
+            
+            frame.onload = () => {
+                loader.style.display = 'none';
+            };
+        } else {
+            loader.innerText = "Error: File content unavailable.";
+            loader.style.color = "#f87171";
+        }
+    </script>
 </body>
 </html>
