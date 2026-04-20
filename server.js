@@ -722,7 +722,7 @@ app.put('/', async(req, res) => {
 
 app.get('/prospects', async(req, res) => {
     try {
-        const prospects = await Appointments.find({});
+        const prospects = await FinancialProspects.find({});
         console.log(prospects)
         res.status(201).json(prospects)
     } catch(err) {
@@ -732,7 +732,7 @@ app.get('/prospects', async(req, res) => {
 
 app.post('/prospects', async(req, res) => {
     try {
-        const prospect = await Appointments.create(req.body);
+        const prospect = await FinancialProspects.create(req.body);
         console.log(prospect)
         res.status(201).json({'status': `I have created a new prospect for ${req.body.firstName}`})
     } catch(err) {
