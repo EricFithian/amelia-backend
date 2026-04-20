@@ -19,6 +19,9 @@ const FinancialProspectsSchema = new mongoose.Schema({
   },
   notes: {
     type: String
+  },
+  pdfBase64: {
+    type: String
   }
 },{timestamps: true});
 
