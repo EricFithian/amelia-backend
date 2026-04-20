@@ -687,6 +687,27 @@ app.delete('/appointments_scheduled/:patient/:date1/:time1', async(req, res) => 
     }
 })
 
+// Financial Prospects
+app.get('/prospects', async(req, res) => {
+    try {
+        const prospects = await FinancialProspects.find({});
+        console.log(prospects)
+        res.status(201).json(prospects)
+    } catch(err) {
+        res.status(403).json({result: err})
+    }
+})
+
+app.post('/prospects', async(req, res) => {
+    try {
+        const prospect = await FinancialProspects.create(req.body);
+        console.log(prospect)
+        res.status(201).json({'status': `I have created a new prospect for ${req.body.firstName}`})
+    } catch(err) {
+        res.status(403).json({result: err})
+    }
+})
+
 app.get('/:email', async (req, res) => {
     try {
         let currentUser
@@ -715,28 +736,6 @@ app.put('/', async(req, res) => {
     } catch(err) {
         console.log(err);
         res.status(403).json({result: res.redirect(`/${req.body.email}`)});
-    }
-})
-
-// Financial Prospects
-
-app.get('/prospects', async(req, res) => {
-    try {
-        const prospects = await FinancialProspects.find({});
-        console.log(prospects)
-        res.status(201).json(prospects)
-    } catch(err) {
-        res.status(403).json({result: err})
-    }
-})
-
-app.post('/prospects', async(req, res) => {
-    try {
-        const prospect = await FinancialProspects.create(req.body);
-        console.log(prospect)
-        res.status(201).json({'status': `I have created a new prospect for ${req.body.firstName}`})
-    } catch(err) {
-        res.status(403).json({result: err})
     }
 })
 
