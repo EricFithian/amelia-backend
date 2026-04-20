@@ -270,6 +270,26 @@ app.get('/frontend', async (req, res) => {
         res.status(400).json(err);
     }
 })
+
+app.get('/prospects/:id', async (req, res) => {
+    try {
+        const prospect = await FinancialProspects.findById(req.params.id);
+        
+        if (!prospect) {
+            return res.status(404).send("Financial Prospect not found");
+        }
+
+        // Pass the prospect object to the EJS template
+        res.render('financial_prospects', { 
+            title: prospect.firstName, 
+            pdfData: prospect.base64File 
+        });
+    } catch (err) {
+        res.status(500).send("Error fetching prospect");
+    }
+});
+
+
 // create a test route
 // app.get("/:name", async (req, res) => {
 //     try {

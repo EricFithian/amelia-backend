@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viewing: <%= title %></title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; background: #f4f4f4; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        iframe { border: 1px solid #ddd; margin-top: 15px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1><%= title %>'s Portfolio</h1>
+        <p>Status: <span id="status">Processing...</span></p>
+
+        <iframe id="pdf-frame" width="100%" height="700px"></iframe>
+    </div>
+
+    <script>
+        // Use EJS to inject the string into a JS variable
+        // We wrap it in quotes so it becomes a valid JS string
+        const base64String = "<%- pdfData %>";
+        const frame = document.getElementById('pdf-frame');
+        const status = document.getElementById('status');
+
+        if (base64String && base64String.length > 0) {
+            // Check if the string already has the prefix, if not, add it
+            const prefix = "data:application/pdf;base64,";
+            frame.src = base64String.startsWith("data:") ? base64String : prefix + base64String;
+            
+            status.innerText = "Rendered Successfully";
+            status.style.color = "green";
+        } else {
+            status.innerText = "Error: PDF data is empty or corrupt.";
+            status.style.color = "red";
+        }
+    </script>
+
+</body>
+</html>
