@@ -22,6 +22,6 @@ const FinancialProspectsSchema = new mongoose.Schema({
   }
 },{timestamps: true});
 
-const FinancialProspects = mongoose.model("FinancialProspects", ClaimStatusSchema);
+const FinancialProspects = mongoose.model("FinancialProspects", FinancialProspectsSchema);
 
 module.exports = FinancialProspects
