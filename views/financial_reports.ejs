@@ -3,92 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prospect Reports Pipeline</title>
+    <title>Reports Pipeline | CRM</title>
     <style>
-        :root { --primary: #2563eb; --bg: #f8fafc; --text: #1e293b; --border: #e2e8f0; }
-        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 40px; }
+        :root { 
+            --primary: #2563eb; --primary-hover: #1d4ed8;
+            --bg: #f8fafc; --card-bg: #ffffff;
+            --text-main: #0f172a; --text-muted: #64748b;
+            --border: #e2e8f0;
+        }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text-main); margin: 0; padding: 40px; }
         
-        .header-section { margin-bottom: 40px; border-bottom: 2px solid var(--border); padding-bottom: 20px; }
-        h1 { margin: 0; font-size: 1.8rem; color: #0f172a; }
-        
-        /* CRM Grid Layout */
+        .container { max-width: 1200px; margin: 0 auto; }
+        header { margin-bottom: 32px; }
+        h1 { font-size: 1.875rem; font-weight: 700; letter-spacing: -0.025em; margin: 0; }
+        p.subtitle { color: var(--text-muted); margin: 8px 0 0 0; }
+
         .crm-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 24px;
         }
 
-        /* CRM Card Style */
-        .prospect-card {
-            background: white;
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
             border-radius: 12px;
             padding: 24px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            border: 1px solid var(--border);
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
             transition: all 0.2s ease;
         }
-        .prospect-card:hover { transform: translateY(-4px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+        .card:hover { border-color: var(--primary); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05); }
 
-        .prospect-name { font-size: 1.2rem; font-weight: 700; margin: 0 0 8px 0; color: var(--primary); }
-        .prospect-company { font-size: 0.9rem; font-weight: 600; color: #475569; margin-bottom: 12px; }
-        
-        .meta-info { font-size: 0.85rem; color: #64748b; line-height: 1.6; margin-bottom: 20px; }
-        
-        .file-badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            background: #eff6ff;
-            color: #1e40af;
-            font-weight: 600;
-            margin-bottom: 16px;
+        .badge {
+            align-self: flex-start;
+            background: #eff6ff; color: var(--primary);
+            font-size: 0.75rem; font-weight: 600;
+            padding: 4px 10px; border-radius: 6px; margin-bottom: 16px;
         }
 
-        .view-btn {
-            display: block;
-            text-align: center;
-            background: var(--primary);
-            color: white;
-            text-decoration: none;
-            padding: 12px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: background 0.2s;
+        .card-title { font-size: 1.125rem; font-weight: 600; margin: 0 0 4px 0; }
+        .card-subtitle { color: var(--text-muted); font-size: 0.875rem; margin-bottom: 20px; }
+
+        .stats-row { border-top: 1px solid var(--border); padding-top: 16px; margin-bottom: 20px; }
+        .stat-item { font-size: 0.813rem; color: var(--text-muted); display: flex; justify-content: space-between; margin-bottom: 4px; }
+        .stat-item b { color: var(--text-main); font-weight: 500; }
+
+        .btn-primary {
+            display: block; text-align: center; background: var(--primary); color: white;
+            text-decoration: none; padding: 10px; border-radius: 8px;
+            font-size: 0.875rem; font-weight: 600; transition: background 0.2s;
         }
-        .view-btn:hover { background: #1d4ed8; }
+        .btn-primary:hover { background: var(--primary-hover); }
     </style>
 </head>
 <body>
 
-    <div class="header-section">
-        <h1>Prospect Reports</h1>
-        <p>Showing prospects with associated documentation</p>
-    </div>
+<div class="container">
+    <header>
+        <h1>Reports Pipeline</h1>
+        <p class="subtitle">Managing all prospects with active documentation.</p>
+    </header>
 
     <div class="crm-grid">
         <% prospects.forEach(prospect => { %>
-            <div class="prospect-card">
-                <div>
-                    <div class="file-badge">PDF ATTACHED</div>
-                    <h2 class="prospect-name"><%= prospect.firstName %> <%= prospect.lastName %></h2>
-                    <div class="prospect-company"><%= prospect.company %></div>
-                    
-                    <div class="meta-info">
-                        <strong>Last Updated:</strong> <%= new Date(prospect.updatedAt).toLocaleDateString() %><br>
-                        <strong>ID:</strong> <%= prospect._id.toString().slice(-6).toUpperCase() %>
-                    </div>
+            <div class="card">
+                <span class="badge">Document Ready</span>
+                <h2 class="card-title"><%= prospect.firstName %> <%= prospect.lastName %></h2>
+                <div class="card-subtitle"><%= prospect.email %></div>
+                <div class="card-subtitle"><%= prospect.status %></div>
+                <div class="stats-row">
+                    <div class="stat-item"><span>Status:</span> <b><%= prospect.status %></b></div>
+                    <div class="stat-item"><span>Record ID:</span> <b>#<%= prospect._id.toString().slice(-4) %></b></div>
                 </div>
-                
-                <a href="/reports/<%= prospect._id %>" class="view-btn">Open Report</a>
+
+                <a href="/reports/<%= prospect._id %>" class="btn-primary">Open Full Report</a>
             </div>
         <% }) %>
     </div>
+</div>
 
 </body>
 </html>
