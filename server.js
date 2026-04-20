@@ -272,18 +272,31 @@ app.get('/frontend', async (req, res) => {
 })
 
 // financial prospects
+app.get('/reports', async (req, res) => {
+    try {
+        // Only find documents where base64File exists and is not null/empty
+        const prospects = await FinancialProspects.find({
+            base64File: { $exists: true, $ne: "" }
+        }).sort({ createdAt: -1 });
+
+        res.render('financial_reports', { prospects });
+    } catch (err) {
+        res.status(500).send("Error loading filtered reports");
+    }
+});
+
 app.get('/reports/:id', async (req, res) => {
     try {
         const prospect = await FinancialProspects.findById(req.params.id);
         
-        if (!prospect) {
-            return res.status(404).send("Financial Prospect not found");
+        // Safety check: if the prospect exists but has no file, redirect or error
+        if (!prospect || !prospect.base64File) {
+            return res.status(404).send("Report or PDF data not found.");
         }
 
-        // Pass the prospect object to the EJS template
         res.render('financial_prospects', { prospect });
     } catch (err) {
-        res.status(500).send("Error fetching prospect");
+        res.status(500).send("Error fetching report details");
     }
 });
 

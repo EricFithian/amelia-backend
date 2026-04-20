@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prospect Reports Pipeline</title>
+    <style>
+        :root { --primary: #2563eb; --bg: #f8fafc; --text: #1e293b; --border: #e2e8f0; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 40px; }
+        
+        .header-section { margin-bottom: 40px; border-bottom: 2px solid var(--border); padding-bottom: 20px; }
+        h1 { margin: 0; font-size: 1.8rem; color: #0f172a; }
+        
+        /* CRM Grid Layout */
+        .crm-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        /* CRM Card Style */
+        .prospect-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+        }
+        .prospect-card:hover { transform: translateY(-4px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+
+        .prospect-name { font-size: 1.2rem; font-weight: 700; margin: 0 0 8px 0; color: var(--primary); }
+        .prospect-company { font-size: 0.9rem; font-weight: 600; color: #475569; margin-bottom: 12px; }
+        
+        .meta-info { font-size: 0.85rem; color: #64748b; line-height: 1.6; margin-bottom: 20px; }
+        
+        .file-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            background: #eff6ff;
+            color: #1e40af;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .view-btn {
+            display: block;
+            text-align: center;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+        .view-btn:hover { background: #1d4ed8; }
+    </style>
+</head>
+<body>
+
+    <div class="header-section">
+        <h1>Prospect Reports</h1>
+        <p>Showing prospects with associated documentation</p>
+    </div>
+
+    <div class="crm-grid">
+        <% prospects.forEach(prospect => { %>
+            <div class="prospect-card">
+                <div>
+                    <div class="file-badge">PDF ATTACHED</div>
+                    <h2 class="prospect-name"><%= prospect.name %></h2>
+                    <div class="prospect-company"><%= prospect.company %></div>
+                    
+                    <div class="meta-info">
+                        <strong>Last Updated:</strong> <%= new Date(prospect.updatedAt).toLocaleDateString() %><br>
+                        <strong>ID:</strong> <%= prospect._id.toString().slice(-6).toUpperCase() %>
+                    </div>
+                </div>
+                
+                <a href="/reports/<%= prospect._id %>" class="view-btn">Open Report</a>
+            </div>
+        <% }) %>
+    </div>
+
+</body>
+</html>
