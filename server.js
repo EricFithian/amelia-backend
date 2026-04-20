@@ -734,7 +734,7 @@ app.post('/prospects', async(req, res) => {
     try {
         const prospect = await Appointments.create(req.body);
         console.log(prospect)
-        res.status(201).json({'status': `I have created a new prospect for ${req.body.name}`})
+        res.status(201).json({'status': `I have created a new prospect for ${req.body.firstName}`})
     } catch(err) {
         res.status(403).json({result: err})
     }
