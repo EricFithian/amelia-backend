@@ -39,7 +39,7 @@ app.use(
 
 // console.log(session);
 // console.log(MongoStore);
-const {User, Wildfire, Reservations, RoomService, Insurable, Houndify, Wifi, WifiAdvanced, Appointments, Sessions, Onboarding, PaymentDetails, ClaimStatus, Beneficiary, AppointmentsScheduled, AnnualAppointments} = require('./models')
+const {User, Wildfire, Reservations, RoomService, Insurable, Houndify, Wifi, WifiAdvanced, Appointments, Sessions, Onboarding, PaymentDetails, ClaimStatus, Beneficiary, AppointmentsScheduled, AnnualAppointments, FinancialProspects} = require('./models')
 const optum = require('./optum.json')
 
 
@@ -717,6 +717,29 @@ app.put('/', async(req, res) => {
         res.status(403).json({result: res.redirect(`/${req.body.email}`)});
     }
 })
+
+// Financial Prospects
+
+app.get('/prospects', async(req, res) => {
+    try {
+        const prospects = await Appointments.find({});
+        console.log(prospects)
+        res.status(201).json(prospects)
+    } catch(err) {
+        res.status(403).json({result: err})
+    }
+})
+
+app.post('/prospects', async(req, res) => {
+    try {
+        const prospect = await Appointments.create(req.body);
+        console.log(prospect)
+        res.status(201).json({'status': `I have created a new prospect for ${req.body.name}`})
+    } catch(err) {
+        res.status(403).json({result: err})
+    }
+})
+
 
 // app.delete('/delete', async (req, res) => {
 //     try {
