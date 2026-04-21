@@ -723,7 +723,7 @@ app.get('/prospects', async(req, res) => {
     try {
         const prospects = await FinancialProspects.find({});
         console.log(prospects)
-        res.status(201).json(prospects)
+        res.status(200).json(prospects)
     } catch(err) {
         res.status(403).json({result: err})
     }
@@ -738,6 +738,15 @@ app.post('/prospects', async(req, res) => {
         res.status(403).json({result: err})
     }
 })
+
+app.get('/prospects/:id', async (req, res) => {
+    try {
+        const prospect = await FinancialProspects.findById(req.params.id);
+        res.status(200).json(prospect)
+    } catch (err) {
+        res.status(403).json({result: err})
+    }
+});
 
 app.get('/:email', async (req, res) => {
     try {
