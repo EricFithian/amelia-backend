@@ -41,6 +41,12 @@ app.use(
 // console.log(MongoStore);
 const {User, Wildfire, Reservations, RoomService, Insurable, Houndify, Wifi, WifiAdvanced, Appointments, Sessions, Onboarding, PaymentDetails, ClaimStatus, Beneficiary, AppointmentsScheduled, AnnualAppointments} = require('./models')
 const optum = require('./optum.json')
+const accountExecs = require('./accountExecs')
+const hcOffices = require('./hcOffices')
+const hcProviders = require('./hcProviders')
+const hcTerritory = require('./hcTerritory')
+const inventoryOrders = require('./inventoryOrders')
+const sampleOrders = require('./sampleOrders')
 
 
 ///////////////////////////////
@@ -194,10 +200,44 @@ app.get('/beneficiary', async (req, res) => {
     }
 })
 
-app.get('/beneficiary/:email', async (req, res) => {
+app.get('/hcOffices', async (req, res) => {
     try {
-        const singleBenfit = await Beneficiary.findOne({emailOfPolicyHolder: req.params.email});
-        res.status(200).json({beneficiary: singleBenfit});
+        res.status(200).json({hcOffices: hcOffices, error: null});
+    } catch(err) {
+        res.status(400).json(err);
+    }
+})
+app.get('/hcProviders', async (req, res) => {
+    try {
+        res.status(200).json({hcProviders: hcProviders, error: null});
+    } catch(err) {
+        res.status(400).json(err);
+    }
+})
+app.get('/hcTerritory', async (req, res) => {
+    try {
+        res.status(200).json({hcTerritory: hcTerritory, error: null});
+    } catch(err) {
+        res.status(400).json(err);
+    }
+})
+app.get('/inventoryOrders', async (req, res) => {
+    try {
+        res.status(200).json({inventoryOrders: inventoryOrders, error: null});
+    } catch(err) {
+        res.status(400).json(err);
+    }
+})
+app.get('/accountExecs', async (req, res) => {
+    try {
+        res.status(200).json({accountExecs: accountExecs, error: null});
+    } catch(err) {
+        res.status(400).json(err);
+    }
+})
+app.get('/sampleOrders', async (req, res) => {
+    try {
+        res.status(200).json({sampleOrders: sampleOrders, error: null});
     } catch(err) {
         res.status(400).json(err);
     }
