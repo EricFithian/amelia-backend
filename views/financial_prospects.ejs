@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Report View | <%= prospect.name %></title>
+    <style>
+        :root { 
+            --primary: #2563eb; --border: #e2e8f0;
+            --sidebar-bg: #ffffff; --viewer-bg: #1e293b;
+            --text-main: #0f172a; --text-muted: #64748b;
+        }
+        body { font-family: 'Inter', sans-serif; margin: 0; display: flex; height: 100vh; overflow: hidden; background: var(--viewer-bg); }
+
+        /* Sidebar Design */
+        .sidebar { 
+            width: 380px; background: var(--sidebar-bg); border-right: 1px solid var(--border);
+            display: flex; flex-direction: column; z-index: 10;
+        }
+        .sidebar-header { padding: 32px 24px 20px; border-bottom: 1px solid var(--border); }
+        .back-link { font-size: 0.875rem; color: var(--primary); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; margin-bottom: 12px; }
+        
+        .sidebar-scroll { padding: 24px; overflow-y: auto; flex-grow: 1; }
+        
+        h2 { font-size: 1.5rem; font-weight: 700; margin: 0; color: var(--text-main); }
+        .company-tag { color: var(--text-muted); font-size: 0.875rem; margin-top: 4px; }
+
+        .section-label { font-size: 0.7rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin: 24px 0 8px 0; display: block; }
+        
+        .ai-summary-card { 
+            background: #f8fafc; border: 1px solid var(--border); border-radius: 8px;
+            padding: 16px; font-size: 0.938rem; line-height: 1.6; color: #334155;
+        }
+
+        /* Viewer Design */
+        .viewer-container { flex-grow: 1; position: relative; }
+        iframe { width: 100%; height: 100%; border: none; }
+        
+        .viewer-status {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            color: #94a3b8; font-size: 0.875rem; pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <a href="/reports" class="back-link">← Pipeline</a>
+        <h2><%= prospect.firstName %> <%= prospect.lastName %></h2>
+        <div class="company-tag"><%= prospect.email %></div>
+        <div class="company-tag"><%= prospect.status %></div>
+    </div>
+
+    <div class="sidebar-scroll">
+        <span class="section-label">AI Interpretation</span>
+
+        <div class="ai-summary-card">
+            <%= prospect.notes || "Analysis results are currently being processed..." %>
+        </div>
+
+        <span class="section-label">Report Metadata</span>
+        <div style="font-size: 0.875rem; color: var(--text-muted);">
+            <div style="margin-bottom: 8px;"><b>Source:</b> Internal Upload</div>
+            <div><b>Reference:</b> <%= prospect._id %></div>
+        </div>
+    </div>
+</aside>
+
+<main class="viewer-container">
+    <div id="status" class="viewer-status">Initializing PDF Viewer...</div>
+    <iframe id="pdf-frame"></iframe>
+</main>
+
+<script>
+    const base64Data = "<%- prospect.base64File %>";
+    const frame = document.getElementById('pdf-frame');
+    const status = document.getElementById('status');
+
+    if (base64Data && base64Data.length > 50) {
+        const prefix = "data:application/pdf;base64,";
+        frame.src = base64Data.startsWith("data:") ? base64Data : prefix + base64Data;
+        frame.onload = () => status.style.display = 'none';
+    } else {
+        status.innerText = "Error: Invalid or missing PDF file.";
+        status.style.color = "#ef4444";
+    }
+</script>
+
+</body>
+</html>

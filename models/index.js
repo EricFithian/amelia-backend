@@ -14,6 +14,7 @@ const RoomService = require('./RoomService')
 const AnnualAppointments = require('./AnnualAppointments')
 const AppointmentsScheduled = require('./AppointmentsScheduled')
 const Wildfire = require('./Wildfire')
+const FinancialProspects = require('./FinancialProspects')
 
 module.exports = {
     User,
@@ -30,5 +31,6 @@ module.exports = {
     RoomService,
     AppointmentsScheduled,
     AnnualAppointments,
-    Wildfire
+    Wildfire,
+    FinancialProspects
 }

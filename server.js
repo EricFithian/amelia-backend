@@ -39,7 +39,7 @@ app.use(
 
 // console.log(session);
 // console.log(MongoStore);
-const {User, Wildfire, Reservations, RoomService, Insurable, Houndify, Wifi, WifiAdvanced, Appointments, Sessions, Onboarding, PaymentDetails, ClaimStatus, Beneficiary, AppointmentsScheduled, AnnualAppointments} = require('./models')
+const {User, Wildfire, Reservations, RoomService, Insurable, Houndify, Wifi, WifiAdvanced, Appointments, Sessions, Onboarding, PaymentDetails, ClaimStatus, Beneficiary, AppointmentsScheduled, AnnualAppointments, FinancialProspects} = require('./models')
 const optum = require('./optum.json')
 const accountExecs = require('./accountExecs')
 const hcOffices = require('./hcOffices')
@@ -310,6 +310,37 @@ app.get('/frontend', async (req, res) => {
         res.status(400).json(err);
     }
 })
+
+// financial prospects
+app.get('/reports', async (req, res) => {
+    try {
+        // Only find documents where base64File exists and is not null/empty
+        const prospects = await FinancialProspects.find({
+            base64File: { $exists: true, $ne: "" }
+        }).sort({ createdAt: -1 });
+
+        res.render('financial_reports', { prospects });
+    } catch (err) {
+        res.status(500).send("Error loading filtered reports");
+    }
+});
+
+app.get('/reports/:id', async (req, res) => {
+    try {
+        const prospect = await FinancialProspects.findById(req.params.id);
+        
+        // Safety check: if the prospect exists but has no file, redirect or error
+        if (!prospect || !prospect.base64File) {
+            return res.status(404).send("Report or PDF data not found.");
+        }
+
+        res.render('financial_prospects', { prospect });
+    } catch (err) {
+        res.status(500).send("Error fetching report details");
+    }
+});
+
+
 // create a test route
 // app.get("/:name", async (req, res) => {
 //     try {
@@ -727,6 +758,36 @@ app.delete('/appointments_scheduled/:patient/:date1/:time1', async(req, res) => 
     }
 })
 
+// Financial Prospects
+app.get('/prospects', async(req, res) => {
+    try {
+        const prospects = await FinancialProspects.find({});
+        console.log(prospects)
+        res.status(200).json(prospects)
+    } catch(err) {
+        res.status(403).json({result: err})
+    }
+})
+
+app.post('/prospects', async(req, res) => {
+    try {
+        const prospect = await FinancialProspects.create(req.body);
+        console.log(prospect)
+        res.status(201).json({'status': `I have created a new prospect for ${req.body.firstName}`})
+    } catch(err) {
+        res.status(403).json({result: err})
+    }
+})
+
+app.get('/prospects/:id', async (req, res) => {
+    try {
+        const prospect = await FinancialProspects.findById(req.params.id);
+        res.status(200).json(prospect)
+    } catch (err) {
+        res.status(403).json({result: err})
+    }
+});
+
 app.get('/:email', async (req, res) => {
     try {
         let currentUser
@@ -757,6 +818,7 @@ app.put('/', async(req, res) => {
         res.status(403).json({result: res.redirect(`/${req.body.email}`)});
     }
 })
+
 
 // app.delete('/delete', async (req, res) => {
 //     try {
