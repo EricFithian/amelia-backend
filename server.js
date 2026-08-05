@@ -427,6 +427,17 @@ app.post('/epic_appointments', async (req, res) => {
     }
 })
 
+app.delete('/epic_appointments/:start', async (req, res) => {
+    try {
+        console.log(req.body);
+        const newAppointment = await EpicAppointment.findOneAndDelete({start: req.params.start});
+        console.log(newAppointment);
+        res.status(201).json({result: "The post was successful", error: null})
+    } catch(err) {
+        res.status(400).json({result: err});
+    }
+})
+
 app.post('/epic_availability', async (req, res) => {
     try {
         console.log(req.body);
