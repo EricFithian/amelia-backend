@@ -4,18 +4,18 @@ const mongoose = require("mongoose");
 // MODELS
 ////////////////////////////////
 
+let codingSchema = new mongoose.Schema({
+  system: {type: String, default: "http://example.com/epic/service-category"},
+  code: {type: Number, default: 100},
+  display: {type: String, default: "Outpatient"}
+})
+
 let EpicAppointmentsSchema = new mongoose.Schema({
   resourceType: String,
   status: String,
   serviceCategory: [
     {
-      coding: [
-        {
-          system: {type: String, default: "http://example.com/epic/service-category"},
-          code: {type: Number, default: 100},
-          display: {type: String, default: "Outpatient"}
-        }
-      ]
+      coding: [codingSchema]
     }
   ],
   serviceType: [

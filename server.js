@@ -10,7 +10,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session')
 const MongoStore = require('connect-mongo');
 const app = express();
-const { PORT = 4321, MONGODB_URI } = process.env;
+const { PORT, MONGODB_URI } = process.env;
 
 ///////////////////////////////
 // MIDDLEWARE
