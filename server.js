@@ -426,7 +426,7 @@ app.post('/epic_appointments', async (req, res) => {
         res.status(400).json({result: err});
     }
 })
-
+// Note
 app.delete('/epic_appointments/:start', async (req, res) => {
     try {
         console.log(req.body);
