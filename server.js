@@ -39,7 +39,7 @@ app.use(
 
 // console.log(session);
 // console.log(MongoStore);
-const {User, Wildfire, Reservations, RoomService, Insurable, Houndify, Wifi, WifiAdvanced, Appointments, Sessions, Onboarding, PaymentDetails, ClaimStatus, Beneficiary, AppointmentsScheduled, AnnualAppointments, FinancialProspects} = require('./models')
+const {User, Wildfire, Reservations, RoomService, Insurable, Houndify, Wifi, WifiAdvanced, Appointments, Sessions, Onboarding, PaymentDetails, ClaimStatus, Beneficiary, AppointmentsScheduled, AnnualAppointments, FinancialProspects, EpicAppointment, EpicAvailability} = require('./models')
 const optum = require('./optum.json')
 const accountExecs = require('./accountExecs')
 const hcOffices = require('./hcOffices')
@@ -389,6 +389,50 @@ app.post('/wildfire', async (req, res) => {
         const newWildfire = await Wildfire.create(req.body);
         console.log(newWildfire);
         res.status(200).json({result: 'The post to your database was successful', error: null})
+    } catch(err) {
+        res.status(400).json({result: err});
+    }
+})
+
+app.get('/epic_appointments', async (req, res) => {
+    try {
+        console.log(req.body);
+        const allAppointments = await EpicAppointment.find({});
+        console.log(newAppointment);
+        res.status(200).json({appointments: allAppointments, error: null})
+    } catch(err) {
+        res.status(400).json({result: err});
+    }
+})
+
+app.get('/epic_availability', async (req, res) => {
+    try {
+        console.log(req.body);
+        const allAvailability = await EpicAvailability.find({});
+        console.log(newAppointment);
+        res.status(200).json({appointments: allAvailability, error: null})
+    } catch(err) {
+        res.status(400).json({result: err});
+    }
+})
+
+app.post('/epic_appointments', async (req, res) => {
+    try {
+        console.log(req.body);
+        const newAppointment = await EpicAppointment.create(req.body);
+        console.log(newAppointment);
+        res.status(201).json({result: "The post was successful", error: null})
+    } catch(err) {
+        res.status(400).json({result: err});
+    }
+})
+
+app.post('/epic_availability', async (req, res) => {
+    try {
+        console.log(req.body);
+        const newAppointment = await EpicAppointment.create(req.body);
+        console.log(newAppointment);
+        res.status(201).json({result: "The post was successful", error: null})
     } catch(err) {
         res.status(400).json({result: err});
     }

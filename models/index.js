@@ -15,6 +15,8 @@ const AnnualAppointments = require('./AnnualAppointments')
 const AppointmentsScheduled = require('./AppointmentsScheduled')
 const Wildfire = require('./Wildfire')
 const FinancialProspects = require('./FinancialProspects')
+const EpicAppointment = require('./EpicAppointment')
+const EpicAvailability = require('./EpicAvailability')
 
 module.exports = {
     User,
@@ -32,5 +34,7 @@ module.exports = {
     AppointmentsScheduled,
     AnnualAppointments,
     Wildfire,
-    FinancialProspects
+    FinancialProspects,
+    EpicAppointment,
+    EpicAvailability
 }

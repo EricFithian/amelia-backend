@@ -1,0 +1,15 @@
+amelia-login --url https://agents-stg.soundhound.com/Amelia/
+amelia-domain-import --url https://agents-stg.soundhound.com/Amelia/ --directory /Users/ericfithian/Downloads/ --domain-code 01one --no-rbac-authority
+amelia-entity-import --url https://agents-stg.soundhound.com/Amelia/ --directory /Users/idriss.dimson/Documents/amelia-customersupport --domain-code 01one
+amelia-intent-import --url https://agents-stg.soundhound.com/Amelia/ --directory /Users/idriss.dimson/Documents/amelia-customersupport --domain-code 01one
+amelia-response-pool-import --url https://agents-stg.soundhound.com/Amelia/ --directory /Users/idriss.dimson/Documents/amelia-customersupport --domain-code 01one
+amelia-script-import --url https://agents-stg.soundhound.com/Amelia/ --directory /Users/idriss.dimson/Documents/amelia-customersupport --domain-code 01one
+amelia-consume-web-action-import --url https://agents-stg.soundhound.com/Amelia/ --directory /Users/idriss.dimson/Documents/amelia-customersupport --domain-code 01one
+amelia-deb-flow-import --url https://agents-stg.soundhound.com/Amelia/ --directory /Users/idriss.dimson/Documents/amelia-customersupport --domain-code 01one
+amelia-cognitive-agentic-settings-import --url https://agents-stg.soundhound.com/Amelia/ --directory /Users/idriss.dimson/Documents/amelia-customersupport --domain-code 01one
+amelia-cognitive-agent-import --url https://agents-stg.soundhound.com/Amelia/ --directory /Users/idriss.dimson/Documents/amelia-customersupport --domain-code 01one
+amelia-cognitive-agentic-settings-import --url https://agents-stg.soundhound.com/Amelia/ --directory /Users/idriss.dimson/Documents/amelia-customersupport --domain-code 01one
+amelia-cognitive-function-import --url https://agents-stg.soundhound.com/Amelia/ --directory /Users/idriss.dimson/Documents/amelia-customersupport --domain-code 01one
+amelia-cognitive-task-import --url https://agents-stg.soundhound.com/Amelia/ --directory /Users/idriss.dimson/Documents/amelia-customersupport --domain-code 01one
+amelia-logout --url https://agents-stg.soundhound.com/Amelia/
+exit
