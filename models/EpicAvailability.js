@@ -4,22 +4,6 @@ const mongoose = require("mongoose");
 // MODELS
 ////////////////////////////////
 
-let codingSchema = new mongoose.Schema({
-  system: {type: String, default: "http://open.epic.com/FHIR/StructureDefinition/slot-service-type"},
-  code: {type: Number, default: 1001},
-  display: {type: String, default: "Office Visit"}
-})
-
-let serviceTypeSchema = new mongoose.Schema({
-  coding: [codingSchema],
-  text: {type: String, default: "Office Visit"}
-})
-
-let extensionSchema = new mongoose.Schema({
-  url: {type: String, default: "http://open.epic.com/FHIR/StructureDefinition/extension/department-id"},
-  valueString: {type: Number, default: 101001}
-})
-
 let EpicAvailabilitySchema = new mongoose.Schema({
   resourceType: {type: String, default: "Slot"},
   status: {type: String, default: "free"},
@@ -31,8 +15,12 @@ let EpicAvailabilitySchema = new mongoose.Schema({
     reference: {type: String, default: "Schedule/eSch9876543"},
     display: {type: String, default: "Dr. Sarah Taylor - Internal Medicine Schedule"}
   },
-  serviceType: [serviceTypeSchema],
-  extension: [extensionSchema]
+  serviceTypeCodingSystem: {type: String, default: "http://open.epic.com/FHIR/StructureDefinition/slot-service-type"},
+  serviceTypeCodingCode: {type: Number, default: 1001},
+  serviceTypeCodingDisplay: {type: String, default: "Office Visit"},
+  serviceTypeText: {type: String, default: "Office Visit"},
+  extensionURL: {type: String, default: "http://open.epic.com/FHIR/StructureDefinition/extension/department-id"},
+  extensionValueString: {type: Number, default: 101001}
 },{timestamps: true});
 
 const EpicAvailabilities = mongoose.model("EpicAvailability", EpicAvailabilitySchema);
