@@ -19,7 +19,7 @@ let EpicAppointmentsSchema = new mongoose.Schema({
   appointmentTypeCodingCode: {type: String, default: "ROUTINE"},
   appointmentTypeCodingDisplay: {type: String, default: "Routine visit"},
   reasonCodeText: {type: String, default: "Annual Checkup"},
-  description: "Routine Follow-up Appointment",
+  description: {type: String, default: "Routine Follow-up Appointment"},
   start: {type: String, default: "2026-08-10T09:00:00Z"},
   end: {type: String, default: "2026-08-10T09:30:00Z"},
   comment: {type: String, default: "Patient requested morning time slot."},

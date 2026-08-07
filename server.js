@@ -426,6 +426,16 @@ app.post('/epic_appointments', async (req, res) => {
         res.status(400).json({result: err});
     }
 })
+app.post('/epic_availability', async (req, res) => {
+    try {
+        console.log(req.body);
+        const newAppointment = await EpicAvailability.create(req.body);
+        console.log(newAppointment);
+        res.status(201).json({result: "The post was successful", error: null})
+    } catch(err) {
+        res.status(400).json({result: err});
+    }
+})
 // Note
 app.delete('/epic_appointments/:start', async (req, res) => {
     try {
@@ -438,16 +448,6 @@ app.delete('/epic_appointments/:start', async (req, res) => {
     }
 })
 
-app.post('/epic_availability', async (req, res) => {
-    try {
-        console.log(req.body);
-        const newAppointment = await EpicAppointment.create(req.body);
-        console.log(newAppointment);
-        res.status(201).json({result: "The post was successful", error: null})
-    } catch(err) {
-        res.status(400).json({result: err});
-    }
-})
 
 app.post('/appointments_scheduled', async (req, res) => {
     try {
